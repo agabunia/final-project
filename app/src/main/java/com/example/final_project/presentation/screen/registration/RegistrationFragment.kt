@@ -49,7 +49,6 @@ class RegistrationFragment :
         }
     }
 
-
     private fun register() {
         viewModel.onEvent(
             RegistrationEvent.Register(
@@ -80,15 +79,17 @@ class RegistrationFragment :
 
     private fun handleNavigationEvents(event: RegistrationViewModel.RegistrationUIEvent) {
         when (event) {
-            is RegistrationViewModel.RegistrationUIEvent.NavigateToLogin -> {
-                navigateToLogin()
-            }
-            is RegistrationViewModel.RegistrationUIEvent.NavigateToMain -> {}
+            is RegistrationViewModel.RegistrationUIEvent.NavigateToLogin -> navigateToLogin()
+            is RegistrationViewModel.RegistrationUIEvent.NavigateToMain -> navigateToMain()
         }
     }
 
     private fun navigateToLogin() {
         findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
+    }
+
+    private fun navigateToMain() {
+        findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainFragment())
     }
 
 }

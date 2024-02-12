@@ -3,6 +3,7 @@ package com.example.final_project.presentation.screen.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
+import com.example.final_project.domain.usecase.datastore.SaveDataStoreUseCase
 import com.example.final_project.domain.usecase.login.LoginUseCase
 import com.example.final_project.domain.usecase.validators.EmailValidatorUseCase
 import com.example.final_project.domain.usecase.validators.PasswordValidatorUseCase
@@ -22,6 +23,7 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val emailValidatorUseCase: EmailValidatorUseCase,
     private val passwordValidatorUseCase: PasswordValidatorUseCase,
+    private val saveDataStoreUseCase: SaveDataStoreUseCase
 ) : ViewModel() {
 
     private val _loginState = MutableStateFlow(LoginState())
@@ -33,7 +35,7 @@ class LoginViewModel @Inject constructor(
     fun onEvent(event: LoginEvent) {
         when (event) {
             is LoginEvent.Login -> {
-                login(email = event.email, password = event.password)
+                login(email = event.email, password = event.password, saveUser = event.saveUser)
             }
 
             is LoginEvent.ResetErrorMessage -> {
@@ -44,11 +46,14 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun loginUser(email: String, password: String) {
+    private fun loginUser(email: String, password: String, saveUser: Boolean) {
         viewModelScope.launch {
             loginUseCase(email = email, password = password).collect {
                 when (it) {
                     is Resource.Success -> {
+                        if (saveUser) {
+                            saveDataStoreUseCase(it.data.toString())
+                        }
                         _loginState.update { currentState -> currentState.copy(data = it.data.toString()) }
                         _uiEvent.emit(LoginUiEvent.NavigateToMain)
                     }
@@ -71,7 +76,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun login(email: String, password: String) {
+    private fun login(email: String, password: String, saveUser: Boolean) {
         val isEmailValid = emailValidatorUseCase(email)
         val isPasswordValid = passwordValidatorUseCase(password)
 
@@ -81,7 +86,7 @@ class LoginViewModel @Inject constructor(
         } else if (!isPasswordValid) {
             errorMessage(message = "Password is not valid!")
         } else {
-            loginUser(email = email, password = password)
+            loginUser(email = email, password = password, saveUser = saveUser)
         }
     }
 

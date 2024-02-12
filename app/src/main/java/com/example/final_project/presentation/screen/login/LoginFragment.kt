@@ -53,7 +53,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         viewModel.onEvent(
             LoginEvent.Login(
                 email = binding.etEmailInput.text.toString(),
-                password = binding.etPasswordInput.text.toString()
+                password = binding.etPasswordInput.text.toString(),
+                saveUser = binding.cbSaveUser.isChecked
             )
         )
     }
@@ -78,16 +79,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun handleNavigationEvents(event: LoginViewModel.LoginUiEvent) {
         when (event) {
-            is LoginViewModel.LoginUiEvent.NavigateToMain -> {}
-
-            is LoginViewModel.LoginUiEvent.NavigateToRegister -> {
-                navigateToRegister()
-            }
+            is LoginViewModel.LoginUiEvent.NavigateToMain -> navigateToLogin()
+            is LoginViewModel.LoginUiEvent.NavigateToRegister -> navigateToRegister()
         }
     }
 
     private fun navigateToRegister() {
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegistrationFragment())
+    }
+
+    private fun navigateToLogin() {
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
     }
 
 }

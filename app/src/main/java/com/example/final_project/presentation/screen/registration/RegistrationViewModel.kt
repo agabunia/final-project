@@ -3,6 +3,7 @@ package com.example.final_project.presentation.screen.registration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
+import com.example.final_project.domain.usecase.datastore.SaveDataStoreUseCase
 import com.example.final_project.domain.usecase.registration.RegistrationUseCase
 import com.example.final_project.domain.usecase.validators.EmailValidatorUseCase
 import com.example.final_project.domain.usecase.validators.PasswordRepeatValidatorUseCase
@@ -23,7 +24,8 @@ class RegistrationViewModel @Inject constructor(
     private val registrationUseCase: RegistrationUseCase,
     private val emailValidatorUseCase: EmailValidatorUseCase,
     private val passwordValidatorUseCase: PasswordValidatorUseCase,
-    private val passwordRepeatValidatorUseCase: PasswordRepeatValidatorUseCase
+    private val passwordRepeatValidatorUseCase: PasswordRepeatValidatorUseCase,
+    private val saveDataStoreUseCase: SaveDataStoreUseCase
 ) : ViewModel() {
 
     private val _registerState = MutableStateFlow(RegistrationState())
@@ -55,8 +57,9 @@ class RegistrationViewModel @Inject constructor(
             registrationUseCase(email = email, password = password).collect {
                 when (it) {
                     is Resource.Success -> {
+                        saveDataStoreUseCase(it.data.toString())
                         _registerState.update { currentState -> currentState.copy(data = it.data.toString()) }
-                        _uiEvent.emit(RegistrationUIEvent.NavigateToLogin)
+                        _uiEvent.emit(RegistrationUIEvent.NavigateToMain)
                     }
 
                     is Resource.Error -> {
