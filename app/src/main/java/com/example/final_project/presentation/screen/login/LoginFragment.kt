@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.final_project.databinding.FragmentLoginBinding
+import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.login.LoginEvent
 import com.example.final_project.presentation.state.login.LoginState
@@ -19,6 +20,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private val viewModel: LoginViewModel by viewModels()
 
     override fun bind() {
+        (activity as? MainActivity)?.hideBottomNavigationBar()
     }
 
     override fun bindListeners() {
@@ -89,7 +91,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun navigateToLogin() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
     }
 
 }

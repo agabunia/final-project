@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.final_project.databinding.FragmentRegistrationBinding
+import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.registration.RegistrationEvent
 import com.example.final_project.presentation.state.registration.RegistrationState
@@ -19,7 +20,9 @@ class RegistrationFragment :
     BaseFragment<FragmentRegistrationBinding>(FragmentRegistrationBinding::inflate) {
     private val viewModel: RegistrationViewModel by viewModels()
 
-    override fun bind() {}
+    override fun bind() {
+        (activity as? MainActivity)?.hideBottomNavigationBar()
+    }
 
     override fun bindListeners() {
         binding.btnRegister.setOnClickListener {
@@ -89,7 +92,7 @@ class RegistrationFragment :
     }
 
     private fun navigateToMain() {
-        findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToMainFragment())
+        findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToHomeFragment())
     }
 
 }

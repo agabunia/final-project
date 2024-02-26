@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.final_project.databinding.FragmentSplashBinding
+import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     private val viewModel: SplashViewModel by viewModels()
 
     override fun bind() {
+        (activity as? MainActivity)?.hideBottomNavigationBar()
     }
 
     override fun bindListeners() {
@@ -42,7 +44,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     }
 
     private fun navigateToMain() {
-        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
+        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
     }
 
 }
