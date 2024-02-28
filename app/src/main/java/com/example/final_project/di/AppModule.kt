@@ -1,6 +1,7 @@
 package com.example.final_project.di
 
 import com.example.final_project.data.common.HandleResponse
+import com.example.final_project.data.remote.service.access_token.AccessTokenService
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,7 +16,10 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -77,6 +81,12 @@ object AppModule {
     @Provides
     fun provideHandleResponse(): HandleResponse {
         return HandleResponse()
+    }
+
+    @Singleton
+    @Provides
+    fun provideAccessTokenService(retrofit: Retrofit): AccessTokenService {
+        return retrofit.create(AccessTokenService::class.java)
     }
 
 }

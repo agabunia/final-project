@@ -14,7 +14,9 @@ import com.example.final_project.R
 import com.example.final_project.databinding.ActivityMainBinding
 import com.example.final_project.presentation.screen.home.HomeFragment
 import com.example.final_project.presentation.screen.library.LibraryFragment
+import com.example.final_project.presentation.screen.profile.ProfileFragment
 import com.example.final_project.presentation.screen.search.SearchFragment
+import com.example.final_project.presentation.screen.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         bottomNavigationListener()
+        setDrawerNavigationListener()
     }
 
     fun hideBottomNavigationBar() {
@@ -37,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.visibility = View.VISIBLE
     }
 
+    // ესეც გასასწორებელია ალბათ. სპლეშში რეგისტრაცია და ლოგინში არჩანს მაგრამ არაა
+    // კარგად დაჰენდლილი.
     private fun bottomNavigationListener() {
         binding.bottomNavigation.selectedItemId = R.id.homeFragment
         binding.bottomNavigation.setOnItemSelectedListener {
@@ -44,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.searchFragment -> replaceFragment(SearchFragment())
                 R.id.homeFragment -> replaceFragment(HomeFragment())
                 R.id.libraryFragment -> replaceFragment(LibraryFragment())
+                R.id.profileFragment -> replaceFragment(ProfileFragment())
             }
             true
         }
@@ -54,6 +60,18 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
         fragmentTransaction.commit()
+    }
+
+
+    // ეს გასასწორებელია რომ სპლეშში, რეგისტრაციაში და ლოგინში არ გამოჩნდეს. რატომღაც მგონია რომ
+    // ინდივიდუალურად უნდა გავუწეროთ ფრაგმენტებს
+    private fun setDrawerNavigationListener() {
+        binding.drawerMenu.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.settingsFragment -> replaceFragment(SettingsFragment())
+            }
+            true
+        }
     }
 
 }

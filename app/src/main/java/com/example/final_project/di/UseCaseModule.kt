@@ -1,8 +1,10 @@
 package com.example.final_project.di
 
+import com.example.final_project.domain.repository.access_token.AccessTokenRepository
 import com.example.final_project.domain.repository.datastore.DataStoreRepository
 import com.example.final_project.domain.repository.login.LoginRepository
 import com.example.final_project.domain.repository.registration.RegistrationRepository
+import com.example.final_project.domain.usecase.access_token.AccessTokenUseCase
 import com.example.final_project.domain.usecase.datastore.ClearDataStoreUseCase
 import com.example.final_project.domain.usecase.datastore.ReadDataStoreUseCase
 import com.example.final_project.domain.usecase.datastore.SaveDataStoreUseCase
@@ -77,6 +79,14 @@ object UseCaseModule {
         dataStoreRepository: DataStoreRepository
     ): ClearDataStoreUseCase {
         return ClearDataStoreUseCase(dataStoreRepository = dataStoreRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAccessTokenUseCase(
+        accessTokenRepository: AccessTokenRepository
+    ): AccessTokenUseCase {
+        return AccessTokenUseCase(repository = accessTokenRepository)
     }
 
 }
