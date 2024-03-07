@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#FF000000</color>
+    <color name="input_color">#1B1A1A</color>
+    <color name="hint">#989696</color>
+    <color name="start_blue">#016BB8</color>
+    <color name="genre">#F0EAEA</color>
+    <color name="end_blue">#11A8FD</color>
+    <color name="dark_gray_for_background">#262b30</color>
+    <color name="light_gray_for_items">#282c30</color>
+    <color name="dart_gray_for_bottom_nav">#22262a</color>
+</resources>
