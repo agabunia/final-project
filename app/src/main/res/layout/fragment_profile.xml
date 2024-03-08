@@ -48,8 +48,8 @@
         android:clickable="true"
         android:id="@+id/backg"
         android:src="@drawable/circle"
-        app:layout_constraintEnd_toEndOf="@id/profileBackground"
-        app:layout_constraintTop_toBottomOf="@+id/profileBackground"
+        app:layout_constraintTop_toBottomOf="@id/profileBackground"
+        app:layout_constraintStart_toEndOf="@id/profileBackground"
         android:focusable="true" />
 
     <androidx.appcompat.widget.AppCompatImageView
