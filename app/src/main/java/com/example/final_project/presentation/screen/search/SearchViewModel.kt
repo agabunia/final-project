@@ -58,7 +58,7 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
-    }
+    }sear
 
     private fun fetchProducts() {
         viewModelScope.launch {
