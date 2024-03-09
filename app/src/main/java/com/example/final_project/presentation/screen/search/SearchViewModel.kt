@@ -3,13 +3,12 @@ package com.example.final_project.presentation.screen.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
-import com.example.final_project.domain.usecase.search.GetCategoryUseCase
+import com.example.final_project.domain.usecase.search.GetProductSearchUseCase
 import com.example.final_project.domain.usecase.search.GetProductsUseCase
 import com.example.final_project.presentation.event.search.SearchEvent
 import com.example.final_project.presentation.mapper.search.toPresenter
 import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val getCategoryUseCase: GetCategoryUseCase,
+    private val getProductSearchUseCase: GetProductSearchUseCase,
     private val getProductsUseCase: GetProductsUseCase
 ) : ViewModel() {
 
@@ -28,21 +27,19 @@ class SearchViewModel @Inject constructor(
 
     fun onEvent(event: SearchEvent) {
         when (event) {
-            is SearchEvent.FetchCategory -> fetchCategory()
             is SearchEvent.FetchAllProducts -> fetchProducts()
+            is SearchEvent.FetchSearchProducts -> fetchSearchProducts(search = event.search)
             is SearchEvent.ResetErrorMessage -> errorMessage(message = null)
         }
     }
 
-    private fun fetchCategory() {
+    private fun fetchProducts() {
         viewModelScope.launch {
-            getCategoryUseCase().collect {
+            getProductsUseCase().collect {
                 when (it) {
                     is Resource.Success -> {
                         _searchState.update { currentState ->
-                            currentState.copy(category = it.data.map { category ->
-                                category.toPresenter()
-                            })
+                            currentState.copy(productsList = it.data.toPresenter().products)
                         }
                     }
 
@@ -58,17 +55,15 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
-    }sear
+    }
 
-    private fun fetchProducts() {
+    private fun fetchSearchProducts(search: String) {
         viewModelScope.launch {
-            getProductsUseCase().collect {
+            getProductSearchUseCase(search = search).collect {
                 when (it) {
                     is Resource.Success -> {
                         _searchState.update { currentState ->
-                            currentState.copy(productsList = it.data.map { product ->
-                                product.toPresenter()
-                            })
+                            currentState.copy(productsList = it.data.toPresenter().products)
                         }
                     }
 

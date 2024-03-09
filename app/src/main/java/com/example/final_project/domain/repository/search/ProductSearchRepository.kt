@@ -4,6 +4,6 @@ import com.example.final_project.data.common.Resource
 import com.example.final_project.domain.model.search.GetProducts
 import kotlinx.coroutines.flow.Flow
 
-interface ProductRepository {
-    suspend fun getProducts(): Flow<Resource<GetProducts>>
+interface ProductSearchRepository {
+    suspend fun searchProduct(search: String): Flow<Resource<GetProducts>>
 }

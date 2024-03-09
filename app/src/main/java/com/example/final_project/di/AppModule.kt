@@ -1,7 +1,7 @@
 package com.example.final_project.di
 
 import com.example.final_project.data.common.HandleResponse
-import com.example.final_project.data.remote.service.search.CategoryService
+import com.example.final_project.data.remote.service.search.ProductSearchService
 import com.example.final_project.data.remote.service.search.ProductService
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.moshi.Moshi
@@ -17,6 +17,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -83,14 +84,14 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideCategoryService(retrofit: Retrofit): CategoryService {
-        return retrofit.create(CategoryService::class.java)
+    fun provideProductService(retrofit: Retrofit): ProductService {
+        return retrofit.create(ProductService::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideProductService(retrofit: Retrofit): ProductService {
-        return retrofit.create(ProductService::class.java)
+    fun provideProductSearchService(retrofit: Retrofit): ProductSearchService {
+        return retrofit.create(ProductSearchService::class.java)
     }
 
 }

@@ -6,15 +6,15 @@ import com.example.final_project.data.common.HandleResponse
 import com.example.final_project.data.local.repository.datastore.DataStoreRepositoryImpl
 import com.example.final_project.data.remote.repository.login.LoginRepositoryImpl
 import com.example.final_project.data.remote.repository.registration.RegistrationRepositoryImpl
-import com.example.final_project.data.remote.repository.search.CategoryRepositoryImpl
 import com.example.final_project.data.remote.repository.search.ProductRepositoryImpl
-import com.example.final_project.data.remote.service.search.CategoryService
+import com.example.final_project.data.remote.repository.search.ProductSearchRepositoryImpl
+import com.example.final_project.data.remote.service.search.ProductSearchService
 import com.example.final_project.data.remote.service.search.ProductService
 import com.example.final_project.domain.repository.datastore.DataStoreRepository
 import com.example.final_project.domain.repository.login.LoginRepository
 import com.example.final_project.domain.repository.registration.RegistrationRepository
-import com.example.final_project.domain.repository.search.CategoryRepository
 import com.example.final_project.domain.repository.search.ProductRepository
+import com.example.final_project.domain.repository.search.ProductSearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,18 +42,6 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideCategoryRepository(
-        handleResponse: HandleResponse,
-        categoryService: CategoryService
-    ): CategoryRepository {
-        return CategoryRepositoryImpl(
-            handleResponse = handleResponse,
-            categoryService = categoryService
-        )
-    }
-
-    @Provides
-    @Singleton
     fun provideProductRepository(
         handleResponse: HandleResponse,
         productService: ProductService
@@ -61,6 +49,18 @@ object RepositoryModule {
         return ProductRepositoryImpl(
             handleResponse = handleResponse,
             productService = productService
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductSearchRepository(
+        handleResponse: HandleResponse,
+        productSearchService: ProductSearchService
+    ): ProductSearchRepository {
+        return ProductSearchRepositoryImpl(
+            handleResponse = handleResponse,
+            productSearchService = productSearchService
         )
     }
 

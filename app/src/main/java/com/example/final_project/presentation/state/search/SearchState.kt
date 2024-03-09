@@ -1,11 +1,9 @@
 package com.example.final_project.presentation.state.search
 
-import com.example.final_project.presentation.model.search.Category
-import com.example.final_project.presentation.model.search.Product
+import com.example.final_project.presentation.model.search.Products
 
 data class SearchState(
-    val category: List<Category>? = null,
-    val productsList: List<Product>? = null,
+    val productsList: List<Products.ProductDetailed>? = null,
     val errorMessage: String? = null,
     val isLoading: Boolean = false
 )

@@ -4,19 +4,20 @@ import com.example.final_project.data.common.HandleResponse
 import com.example.final_project.data.common.Resource
 import com.example.final_project.data.remote.mapper.base.asResource
 import com.example.final_project.data.remote.mapper.search.toDomain
+import com.example.final_project.data.remote.service.search.ProductSearchService
 import com.example.final_project.data.remote.service.search.ProductService
 import com.example.final_project.domain.model.search.GetProducts
-import com.example.final_project.domain.repository.search.ProductRepository
+import com.example.final_project.domain.repository.search.ProductSearchRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ProductRepositoryImpl @Inject constructor(
+class ProductSearchRepositoryImpl @Inject constructor(
     private val handleResponse: HandleResponse,
-    private val productService: ProductService
-) : ProductRepository {
-    override suspend fun getProducts(): Flow<Resource<GetProducts>> {
+    private val productSearchService: ProductSearchService
+) : ProductSearchRepository {
+    override suspend fun searchProduct(search: String): Flow<Resource<GetProducts>> {
         return handleResponse.safeApiCall {
-            productService.getProduct()
+            productSearchService.getProduct(search = search)
         }.asResource {
             it.toDomain()
         }

@@ -6,16 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.databinding.ProductLayoutBinding
-import com.example.final_project.presentation.model.search.Product
+import com.example.final_project.presentation.extention.loadImage
+import com.example.final_project.presentation.model.search.Products
 
-class ProductRecyclerAdapter : ListAdapter<Product, ProductRecyclerAdapter.ProductViewHolder>(ProductDiffUtil()) {
+class ProductRecyclerAdapter : ListAdapter<Products.ProductDetailed, ProductRecyclerAdapter.ProductViewHolder>(ProductDiffUtil()) {
 
-    class ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class ProductDiffUtil : DiffUtil.ItemCallback<Products.ProductDetailed>() {
+        override fun areItemsTheSame(oldItem: Products.ProductDetailed, newItem: Products.ProductDetailed): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: Products.ProductDetailed, newItem: Products.ProductDetailed): Boolean {
             return oldItem == newItem
         }
     }
@@ -32,8 +33,17 @@ class ProductRecyclerAdapter : ListAdapter<Product, ProductRecyclerAdapter.Produ
     var onItemClick: ((Int) -> Unit)? = null
 
     inner class ProductViewHolder(private val binding: ProductLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+        private lateinit var product: Products.ProductDetailed
 
-        fun bind() {}
+        fun bind() {
+            product = currentList[adapterPosition]
+
+            binding.apply {
+                sivProductImage.loadImage(product.thumbnail)
+                tvProductTitle.text = product.title
+                tvProductPrice.text = product.price.toString()
+            }
+        }
     }
 
 }
