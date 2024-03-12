@@ -6,9 +6,11 @@ import com.example.final_project.data.common.Resource
 import com.example.final_project.domain.usecase.search.GetProductSearchUseCase
 import com.example.final_project.domain.usecase.search.GetProductsUseCase
 import com.example.final_project.presentation.event.search.SearchEvent
-import com.example.final_project.presentation.mapper.search.toPresenter
+import com.example.final_project.presentation.mapper.common_product_list.toPresenter
+import com.example.final_project.presentation.screen.login.LoginViewModel
 import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,10 +27,14 @@ class SearchViewModel @Inject constructor(
     private val _searchState = MutableStateFlow(SearchState())
     val searchState: SharedFlow<SearchState> = _searchState.asStateFlow()
 
+    private val _uiEvent = MutableSharedFlow<SearchUIEvent>()
+    val uiEvent: SharedFlow<SearchUIEvent> get() = _uiEvent
+
     fun onEvent(event: SearchEvent) {
         when (event) {
             is SearchEvent.FetchAllProducts -> fetchProducts()
             is SearchEvent.FetchSearchProducts -> fetchSearchProducts(search = event.search)
+            is SearchEvent.MoveToDetailed -> navigateToDetailed()
             is SearchEvent.ResetErrorMessage -> errorMessage(message = null)
         }
     }
@@ -83,6 +89,16 @@ class SearchViewModel @Inject constructor(
 
     private fun errorMessage(message: String?) {
         _searchState.update { currentState -> currentState.copy(errorMessage = message) }
+    }
+
+    private fun navigateToDetailed() {
+        viewModelScope.launch {
+            _uiEvent.emit(SearchUIEvent.NavigateToDetailed)
+        }
+    }
+
+    sealed interface SearchUIEvent {
+        object NavigateToDetailed : SearchUIEvent
     }
 
 }

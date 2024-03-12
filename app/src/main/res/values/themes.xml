@@ -19,4 +19,12 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+
+    <style name="BottomNavigationTheme" parent="Theme.MaterialComponents">
+        <item name="android:navigationBarColor">@style/Widget.BottomNavigationView</item>
+    </style>
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

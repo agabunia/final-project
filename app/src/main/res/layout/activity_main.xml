@@ -20,7 +20,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bottom_navigation_shape"
+        android:theme="@style/BottomNavigationTheme"
         android:visibility="gone"
+        app:itemIconTint="@drawable/bottom_navigation_item_selector"
+        app:itemTextColor="@drawable/bottom_navigation_item_selector"
         app:menu="@menu/bottom_nav" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

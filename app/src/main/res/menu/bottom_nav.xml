@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/searchFragment"
-        android:title="@string/search" />
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/heart_icon"
+        android:title="@string/favorites" />
+    <item
+        android:id="@+id/wishlistFragment"
+        android:icon="@drawable/wishlist_icon"
+        android:title="@string/wishlist" />
     <item
         android:id="@+id/homeFragment"
         android:checked="true"
+        android:icon="@drawable/home_icon"
         android:title="@string/home" />
     <item
-        android:id="@+id/libraryFragment"
-        android:title="@string/library" />
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/search_icon"
+        android:title="@string/search" />
     <item
         android:id="@+id/profileFragment"
-        android:title="Profile" />
+        android:icon="@drawable/account_icon"
+        android:title="@string/profile" />
 </menu>

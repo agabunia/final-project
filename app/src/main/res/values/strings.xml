@@ -13,11 +13,14 @@
     <string name="save_info_eng">Save info</string>
     <string name="search">Search</string>
     <string name="home">Home</string>
-    <string name="library">Library</string>
+    <string name="favorites">Favorites</string>
     <string name="language">Language</string>
     <string name="dark_mode">Dark mode</string>
     <string name="theme">Theme</string>
     <string name="communication">Communication</string>
     <string name="share">Share</string>
     <string name="rate_us">Rate us</string>
+    <string name="profile">Profile</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="product">Product</string>
 </resources>

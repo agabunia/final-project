@@ -1,6 +1,8 @@
 package com.example.final_project.di
 
 import com.example.final_project.data.common.HandleResponse
+import com.example.final_project.data.remote.service.home.ProductByCategoryService
+import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
 import com.example.final_project.data.remote.service.search.ProductService
 import com.google.firebase.auth.FirebaseAuth
@@ -92,6 +94,18 @@ object AppModule {
     @Provides
     fun provideProductSearchService(retrofit: Retrofit): ProductSearchService {
         return retrofit.create(ProductSearchService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductDetailedService(retrofit: Retrofit): ProductDetailedService {
+        return retrofit.create(ProductDetailedService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductByCategoryService(retrofit: Retrofit): ProductByCategoryService {
+        return retrofit.create(ProductByCategoryService::class.java)
     }
 
 }

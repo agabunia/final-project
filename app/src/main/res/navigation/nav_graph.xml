@@ -57,17 +57,25 @@
         android:id="@+id/homeFragment"
         android:name="com.example.final_project.presentation.screen.home.HomeFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailedFragment"
+            app:destination="@id/productDetailedFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/libraryFragment"
-        android:name="com.example.final_project.presentation.screen.library.LibraryFragment"
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.final_project.presentation.screen.favorites.FavoritesFragment"
         android:label="fragment_library"
-        tools:layout="@layout/fragment_library" />
+        tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.final_project.presentation.screen.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailedFragment"
+            app:destination="@id/productDetailedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.final_project.presentation.screen.profile.ProfileFragment"
@@ -78,5 +86,19 @@
         android:name="com.example.final_project.presentation.screen.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/productDetailedFragment"
+        android:name="com.example.final_project.presentation.screen.product.ProductDetailedFragment"
+        android:label="fragment_product_detailed"
+        tools:layout="@layout/fragment_product_detailed" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.final_project.presentation.screen.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
 
 </navigation>
