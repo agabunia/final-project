@@ -23,4 +23,7 @@
     <string name="profile">Profile</string>
     <string name="wishlist">Wishlist</string>
     <string name="product">Product</string>
+    <string name="dollar_sign">$</string>
+    <string name="percent_sign">%</string>
+    <string name="off">OFF</string>
 </resources>

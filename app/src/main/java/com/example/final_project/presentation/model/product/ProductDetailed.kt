@@ -11,5 +11,6 @@ data class ProductDetailed(
     val brand: String,
     val category: String,
     val thumbnail: String,
-    val images: List<String>
+    val images: List<String>,
+    var isLiked: Boolean = false
 )

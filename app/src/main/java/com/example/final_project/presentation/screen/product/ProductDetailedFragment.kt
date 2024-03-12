@@ -85,6 +85,15 @@ class ProductDetailedFragment :
             tvProductStock.text = product.stock.toString()
 
             setViewPagerAdapter(product.images)
+
+            btnLike.setOnClickListener {
+                if (product.isLiked) {
+                    btnLike.setImageResource(R.drawable.like_uncliked_icon)
+                } else {
+                    btnLike.setImageResource(R.drawable.like_clicked_icon)
+                }
+                product.isLiked = !product.isLiked
+            }
         }
     }
 
