@@ -57,28 +57,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductTitle" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvProductRating"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:text="4.7"
-                android:textColor="@color/black"
-                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductBrand" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="/5"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@+id/tvProductRating"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductBrand" />
+                app:layout_constraintTop_toBottomOf="@+id/tvProductBrand"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvProductDescription"
@@ -92,7 +76,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductRating" />
+                app:layout_constraintTop_toBottomOf="@+id/rvStar" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvDollarSign"

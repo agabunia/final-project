@@ -6,7 +6,7 @@ data class ProductDetailed(
     val description: String,
     val price: Int,
     val discountPercentage: Float,
-    val rating: Float,
+    val rating: Int,
     val stock: Int,
     val brand: String,
     val category: String,

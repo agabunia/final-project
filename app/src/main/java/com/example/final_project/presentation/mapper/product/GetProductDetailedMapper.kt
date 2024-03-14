@@ -10,7 +10,7 @@ fun GetProductDetailed.toPresenter(): ProductDetailed {
         description = description,
         price = price,
         discountPercentage = discountPercentage,
-        rating = rating,
+        rating = Math.round(rating),
         stock = stock,
         brand = brand,
         category = category,

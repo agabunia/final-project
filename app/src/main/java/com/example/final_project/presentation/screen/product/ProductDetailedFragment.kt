@@ -12,11 +12,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.final_project.R
 import com.example.final_project.databinding.FragmentProductDetailedBinding
 import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.product.ImageSlideViewPagerAdapter
+import com.example.final_project.presentation.adapter.product.StarRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.product.ProductEvent
 import com.example.final_project.presentation.event.search.SearchEvent
@@ -32,6 +34,7 @@ class ProductDetailedFragment :
     BaseFragment<FragmentProductDetailedBinding>(FragmentProductDetailedBinding::inflate) {
     private val viewModel: ProductDetailedViewModel by viewModels()
     private lateinit var imageSlideViewPagerAdapter: ImageSlideViewPagerAdapter
+    private lateinit var starRecyclerAdapter: StarRecyclerAdapter
     private val productArgs: ProductDetailedFragmentArgs by navArgs()
 
     override fun bind() {
@@ -81,10 +84,10 @@ class ProductDetailedFragment :
             tvProductPrice.text = product.price.toString()
             tvProductDescription.text = product.description
             tvProductDiscountRate.text = product.discountPercentage.toString()
-            tvProductRating.text = product.rating.toString()
             tvProductStock.text = product.stock.toString()
 
             setViewPagerAdapter(product.images)
+            setStarRecyclerAdapter(product.rating)
 
             btnLike.setOnClickListener {
                 if (product.isLiked) {
@@ -102,6 +105,15 @@ class ProductDetailedFragment :
         binding.apply {
             viewPager.adapter = imageSlideViewPagerAdapter
             viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        }
+    }
+
+    private fun setStarRecyclerAdapter(stars: Int) {
+        starRecyclerAdapter = StarRecyclerAdapter(stars)
+        binding.apply {
+            rvStar.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvStar.setHasFixedSize(true)
+            rvStar.adapter = starRecyclerAdapter
         }
     }
 
