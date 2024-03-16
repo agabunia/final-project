@@ -1,7 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Finalproject" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+    <style name="Theme.Finalproject" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="colorPrimary">@color/green</item>
     </style>
+
+
+    <!--    bottom navigation style for light mode-->
+    <style name="BottomNavigationTheme" parent="Theme.MaterialComponents">
+        <item name="android:navigationBarColor">@style/Widget.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="NavigationBackground">
+        <item name="android:background">@drawable/bottom_navigation_shape_dark</item>
+    </style>
+
+
+    <!--    light mode screen background color       -->
+    <style name="screenBackground">
+        <item name="android:background">@color/green</item>
+    </style>
+
+    <!--    light mode drawer screen background color       -->
+    <style name="drawerScreenBackground">
+        <item name="android:background">@color/greenish</item>
+    </style>
+
+
 </resources>

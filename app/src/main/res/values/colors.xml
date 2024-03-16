@@ -11,4 +11,13 @@
     <color name="yellowish">#DDD9B2</color>
     <color name="red">#F44336</color>
     <color name="yellow">#FFEB3B</color>
+
+    <color name="dark_grey">#5C5B5B</color>
+
+    <color name="blueish">#00BCD4</color>
+    <color name="green">#01534C</color>
+
+    <color name="blue">#01589E</color>
+    <color name="greenish">#083721</color>
+
 </resources>

@@ -7,12 +7,13 @@ interface DataStoreRepository {
 
     suspend fun saveString(key: Preferences.Key<String>, value: String)
 
-    suspend fun saveTheme(key: Preferences.Key<String>, value: String)
-
-    suspend fun saveLanguage(key: Preferences.Key<String>, value: String)
-
     fun readString(key: Preferences.Key<String>): Flow<String>
 
     suspend fun clear()
+
+    // For Theme change
+    suspend fun putThemeString(key: Preferences.Key<String>, value: String)
+    suspend fun getThemeString(key: Preferences.Key<String>): Flow<String>
+
 
 }

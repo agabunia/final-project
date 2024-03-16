@@ -18,13 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.bottomNavigation.setupWithNavController(
-            navController
-        )
-
+        setNavigation()
     }
 
     fun hideBottomNavigationBar() {
@@ -35,6 +29,15 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.visibility = View.VISIBLE
     }
 
+    private fun setNavigation() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(
+            navController
+        )
+    }
+
 
     // ეს გასასწორებელია რომ სპლეშში, რეგისტრაციაში და ლოგინში არ გამოჩნდეს. რატომღაც მგონია რომ
     // ინდივიდუალურად უნდა გავუწეროთ ფრაგმენტებს
@@ -43,11 +46,6 @@ class MainActivity : AppCompatActivity() {
 //            true
 //        }
 //    }
-
-
-
-
-
 
 
     //  შემდეგი სქრიუნიდან გადავცემ წინა სქრინს არგუმენტს

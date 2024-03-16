@@ -4,4 +4,5 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 
 object PreferenceKeys {
     val TOKEN = stringPreferencesKey("access_token")
+    val THEME = stringPreferencesKey("THEME_KEYS")
 }

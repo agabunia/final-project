@@ -1,5 +1,6 @@
 package com.example.final_project.presentation.screen.splash
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.final_project.databinding.FragmentSplashBinding
 import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.base.BaseFragment
+import com.example.final_project.presentation.state.app_state.AppState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,6 +32,14 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.appState.collect {
+                    handleAppStateChange(it)
+                }
+            }
+        }
     }
 
     private fun handleNavigationEvent(event: SplashViewModel.SplashUIEvent) {
@@ -45,6 +55,14 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
 
     private fun navigateToMain() {
         findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+    }
+
+    private fun handleAppStateChange(state: AppState) {
+        if(state.isLight) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 }

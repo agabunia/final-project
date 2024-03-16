@@ -6,7 +6,6 @@
         android:title="@string/search" />
     <item
         android:id="@+id/homeFragment"
-        android:checked="true"
         android:icon="@drawable/home_icon"
         android:title="@string/home" />
     <item
