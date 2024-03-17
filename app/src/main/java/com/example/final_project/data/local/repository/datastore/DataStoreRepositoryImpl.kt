@@ -44,5 +44,17 @@ class DataStoreRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun putLanguageString(key: Preferences.Key<String>, value: String) {
+        dataStore.edit {
+            it[key] = value
+        }
+    }
+
+    override suspend fun getLanguageString(key: Preferences.Key<String>): Flow<String> {
+        return dataStore.data.map {
+            it[key] ?: "en"
+        }
+    }
+
 
 }

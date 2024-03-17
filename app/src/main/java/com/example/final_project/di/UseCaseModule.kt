@@ -3,9 +3,9 @@ package com.example.final_project.di
 import com.example.final_project.domain.repository.datastore.DataStoreRepository
 import com.example.final_project.domain.repository.login.LoginRepository
 import com.example.final_project.domain.repository.registration.RegistrationRepository
-import com.example.final_project.domain.usecase.datastore.ClearDataStoreUseCase
-import com.example.final_project.domain.usecase.datastore.ReadDataStoreUseCase
-import com.example.final_project.domain.usecase.datastore.SaveDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.clear.ClearDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.authorization.ReadDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.authorization.SaveDataStoreUseCase
 import com.example.final_project.domain.usecase.login.LoginUseCase
 import com.example.final_project.domain.usecase.registration.RegistrationUseCase
 import com.example.final_project.domain.usecase.validators.EmailValidatorUseCase

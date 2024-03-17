@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ფინალური პროექტი</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_eng">გამარჯობა</string>
+    <string name="enter_email_eng">შეიყვანეთ ელ.მეილი</string>
+    <string name="enter_password_eng">შეიყვანეთ პაროლი</string>
+    <string name="login_eng">შესვლა</string>
+    <string name="register_now_eng">დარეგისტრირდი ახლა</string>
+    <string name="enter_your_information_eng">შეიყვანეთ თქვენი მონაცემები</string>
+    <string name="repeat_password_eng">გაიმეორეთ პაროლი</string>
+    <string name="register_eng">რეგისტრაცია</string>
+    <string name="save_info_eng">მონაცემების დამახსოვრება</string>
+    <string name="search">ძებნა</string>
+    <string name="home">მთავარი</string>
+    <string name="favorites">ფავორიტები</string>
+    <string name="language">ენა</string>
+    <string name="dark_mode">ბნელი თემა</string>
+    <string name="theme">თემა</string>
+    <string name="communication">კომუნიკაცია</string>
+    <string name="share">გაზიარება</string>
+    <string name="rate_us">შეგვაფასე</string>
+    <string name="profile">პროფილი</string>
+    <string name="wishlist">სურვილების სია</string>
+    <string name="product">პროდუქტი</string>
+    <string name="dollar_sign">$</string>
+    <string name="percent_sign">%</string>
+    <string name="off">OFF</string>
+</resources>

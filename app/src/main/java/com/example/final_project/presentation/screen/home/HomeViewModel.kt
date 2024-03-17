@@ -5,6 +5,8 @@ import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
+import com.example.final_project.domain.usecase.datastore.language.ChangeLanguageDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.language.GetLanguageDataStoreUseCase
 import com.example.final_project.domain.usecase.datastore.theme.ChangeThemeDataStoreUseCase
 import com.example.final_project.domain.usecase.datastore.theme.GetThemeDataStoreUseCase
 import com.example.final_project.domain.usecase.home.GetProductsByCategoryUseCase
@@ -25,7 +27,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
     private val changeThemeDataStoreUseCase: ChangeThemeDataStoreUseCase,
-    private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase
+    private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase,
+    private val changeLanguageDataStoreUseCase: ChangeLanguageDataStoreUseCase,
+    private val getLanguageDataStoreUseCase: GetLanguageDataStoreUseCase
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeState())
@@ -33,8 +37,6 @@ class HomeViewModel @Inject constructor(
 
     private val _appState = MutableStateFlow(AppState())
     val appState: SharedFlow<AppState> = _appState.asStateFlow()
-
-    private var isThemeLoaded = false
 
     fun onEvent(event: HomeEvent) {
         when (event) {
@@ -47,6 +49,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         getTheme()
+        getLanguage()
     }
 
     private val productListsMap = mutableMapOf<String, List<CategoryList>>()
@@ -107,6 +110,26 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun changeLanguage(isGeorgian: Boolean) {}
+    private fun changeLanguage(isGeorgian: Boolean) {
+        viewModelScope.launch {
+            changeLanguageDataStoreUseCase(isGeorgian = isGeorgian)
+        }
+    }
+
+    private fun getLanguage() {
+        viewModelScope.launch {
+            getLanguageDataStoreUseCase().collect {
+                if (it == "ka") {
+                    _appState.update { languageState ->
+                        languageState.copy(isGeorgian = true)
+                    }
+                } else {
+                    _appState.update { languageState ->
+                        languageState.copy(isGeorgian = false)
+                    }
+                }
+            }
+        }
+    }
 
 }

@@ -3,7 +3,7 @@ package com.example.final_project.presentation.screen.registration
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
-import com.example.final_project.domain.usecase.datastore.SaveDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.authorization.SaveDataStoreUseCase
 import com.example.final_project.domain.usecase.registration.RegistrationUseCase
 import com.example.final_project.domain.usecase.validators.EmailValidatorUseCase
 import com.example.final_project.domain.usecase.validators.PasswordRepeatValidatorUseCase

@@ -1,9 +1,8 @@
 package com.example.final_project.presentation.screen.splash
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.final_project.domain.usecase.datastore.ReadDataStoreUseCase
+import com.example.final_project.domain.usecase.datastore.authorization.ReadDataStoreUseCase
 import com.example.final_project.domain.usecase.datastore.theme.GetThemeDataStoreUseCase
 import com.example.final_project.presentation.state.app_state.AppState
 import dagger.hilt.android.lifecycle.HiltViewModel

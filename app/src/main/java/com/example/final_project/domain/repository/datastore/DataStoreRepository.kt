@@ -15,5 +15,8 @@ interface DataStoreRepository {
     suspend fun putThemeString(key: Preferences.Key<String>, value: String)
     suspend fun getThemeString(key: Preferences.Key<String>): Flow<String>
 
+    // For language change
+    suspend fun putLanguageString(key: Preferences.Key<String>, value: String)
+    suspend fun getLanguageString(key: Preferences.Key<String>): Flow<String>
 
 }

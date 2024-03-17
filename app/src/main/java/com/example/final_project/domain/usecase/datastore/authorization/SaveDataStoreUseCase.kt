@@ -1,4 +1,4 @@
-package com.example.final_project.domain.usecase.datastore
+package com.example.final_project.domain.usecase.datastore.authorization
 
 import com.example.final_project.domain.repository.datastore.DataStoreRepository
 import com.example.final_project.domain.user_data_key.PreferenceKeys

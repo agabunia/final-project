@@ -1,10 +1,14 @@
 package com.example.final_project.presentation.screen.home
 
+import android.app.LocaleManager
+import android.os.Build
+import android.os.LocaleList
 import android.util.Log.d
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +24,6 @@ import com.example.final_project.presentation.event.home.HomeEvent
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -136,6 +139,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             switchTheme.isChecked = false
+        }
+
+        if (state.isGeorgian) {
+            switchLanguage.isChecked = true
+        } else {
+            switchLanguage.isChecked = false
+        }
+
+        changeLanguageConfig(state.isGeorgian)
+
+    }
+
+    private fun changeLanguageConfig(isGeorgian: Boolean) {
+        val language = if (isGeorgian) "ka" else "en"
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context?.getSystemService(LocaleManager::class.java)
+                ?.applicationLocales = LocaleList.forLanguageTags(language)
+        } else {
+            AppCompatDelegate.setApplicationLocales(
+                LocaleListCompat.forLanguageTags(
+                    language
+                )
+            )
         }
     }
 
