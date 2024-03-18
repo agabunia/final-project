@@ -26,4 +26,9 @@
     <string name="dollar_sign">$</string>
     <string name="percent_sign">%</string>
     <string name="off">OFF</string>
+
+    <string name="user_already_exists">The User Already Exists</string>
+    <string name="incorrect_credential">Incorrect Email/Password</string>
+    <string name="server_fail">Server Connection Failed</string>
+    <string name="internet_failure">No Internet Connection</string>
 </resources>

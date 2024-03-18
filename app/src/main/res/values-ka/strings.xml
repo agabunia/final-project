@@ -27,4 +27,9 @@
     <string name="dollar_sign">$</string>
     <string name="percent_sign">%</string>
     <string name="off">OFF</string>
+
+    <string name="user_already_exists">მომხმარებელი უკვე არსებობს</string>
+    <string name="incorrect_credential">არასწორი მეილი/პაროლი</string>
+    <string name="server_fail">სერვერთან კავშირი გაწყდა</string>
+    <string name="internet_failure">ინტერნეტთან კავშირი გაწყდა</string>
 </resources>
