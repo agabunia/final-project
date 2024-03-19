@@ -90,12 +90,14 @@ class ProductDetailedFragment :
             setStarRecyclerAdapter(product.rating)
 
             btnLike.setOnClickListener {
-                if (product.isLiked) {
-                    btnLike.setImageResource(R.drawable.like_uncliked_icon)
+                if (product.isAdded) {
+                    btnLike.setImageResource(R.drawable.add_button_icon)
                 } else {
-                    btnLike.setImageResource(R.drawable.like_clicked_icon)
+                    btnLike.setImageResource(R.drawable.added_button_icon)
                 }
-                product.isLiked = !product.isLiked
+                product.isAdded = !product.isAdded
+
+                viewModel.onEvent(ProductEvent.SaveProduct(product))
             }
         }
     }
@@ -111,7 +113,8 @@ class ProductDetailedFragment :
     private fun setStarRecyclerAdapter(stars: Int) {
         starRecyclerAdapter = StarRecyclerAdapter(stars)
         binding.apply {
-            rvStar.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvStar.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvStar.setHasFixedSize(true)
             rvStar.adapter = starRecyclerAdapter
         }

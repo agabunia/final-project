@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.databinding.CategoryWrapperLayoutBinding
 import com.example.final_project.presentation.adapter.common_product_adapter.ProductRecyclerAdapter
+import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.model.home.CategoryList
 
 class WrapperRecyclerAdapter :
@@ -33,6 +34,7 @@ class WrapperRecyclerAdapter :
     }
 
     var onWrapperItemClick: ((Int) -> Unit)? = null
+    var onWrapperSaveProductClick: ((Products.ProductDetailed) -> Unit)? = null
 
     inner class WrapperViewHolder(private val binding: CategoryWrapperLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -52,8 +54,17 @@ class WrapperRecyclerAdapter :
             binding.apply {
                 tvCategoryTitle.text = category.categoryName
                 productRecyclerAdapter.submitList(category.productList.products)
+                setListeners()
+            }
+        }
+
+        private fun setListeners() {
+            binding.apply {
                 productRecyclerAdapter.onItemClick = {
                     onWrapperItemClick?.invoke(it)
+                }
+                productRecyclerAdapter.saveProductClick = {
+                    onWrapperSaveProductClick?.invoke(it)
                 }
             }
         }

@@ -3,7 +3,9 @@ package com.example.final_project.di
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.example.final_project.data.common.HandleResponse
+import com.example.final_project.data.local.dao.ProductDao
 import com.example.final_project.data.local.repository.datastore.DataStoreRepositoryImpl
+import com.example.final_project.data.local.repository.room.LocalProductRepositoryImpl
 import com.example.final_project.data.remote.repository.home.ProductByCategoryRepositoryImpl
 import com.example.final_project.data.remote.repository.login.LoginRepositoryImpl
 import com.example.final_project.data.remote.repository.product.ProductDetailedRepositoryImpl
@@ -14,13 +16,14 @@ import com.example.final_project.data.remote.service.home.ProductByCategoryServi
 import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
 import com.example.final_project.data.remote.service.search.ProductService
-import com.example.final_project.domain.repository.datastore.DataStoreRepository
-import com.example.final_project.domain.repository.home.ProductByCategoryRepository
-import com.example.final_project.domain.repository.login.LoginRepository
-import com.example.final_project.domain.repository.product.ProductDetailedRepository
-import com.example.final_project.domain.repository.registration.RegistrationRepository
-import com.example.final_project.domain.repository.search.ProductRepository
-import com.example.final_project.domain.repository.search.ProductSearchRepository
+import com.example.final_project.domain.local.repository.wishlist.LocalProductRepository
+import com.example.final_project.domain.local.repository.datastore.DataStoreRepository
+import com.example.final_project.domain.remote.repository.home.ProductByCategoryRepository
+import com.example.final_project.domain.remote.repository.login.LoginRepository
+import com.example.final_project.domain.remote.repository.product.ProductDetailedRepository
+import com.example.final_project.domain.remote.repository.registration.RegistrationRepository
+import com.example.final_project.domain.remote.repository.search.ProductRepository
+import com.example.final_project.domain.remote.repository.search.ProductSearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -92,6 +95,12 @@ object RepositoryModule {
             handleResponse = handleResponse,
             productByCategoryService = productByCategoryService
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalProductRepository(productDao: ProductDao): LocalProductRepository {
+        return LocalProductRepositoryImpl(productDao = productDao)
     }
 
 }

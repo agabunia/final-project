@@ -31,4 +31,6 @@
     <string name="incorrect_credential">Incorrect Email/Password</string>
     <string name="server_fail">Server Connection Failed</string>
     <string name="internet_failure">No Internet Connection</string>
+
+    <string name="buy_now_price">Buy Now $</string>
 </resources>

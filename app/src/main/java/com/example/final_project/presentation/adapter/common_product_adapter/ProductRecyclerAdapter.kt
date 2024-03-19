@@ -39,6 +39,7 @@ class ProductRecyclerAdapter :
     }
 
     var onItemClick: ((Int) -> Unit)? = null
+    var saveProductClick: ((Products.ProductDetailed) -> Unit)? = null
 
     inner class ProductViewHolder(private val binding: ProductLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -51,23 +52,14 @@ class ProductRecyclerAdapter :
                 sivProductImage.loadImage(product.thumbnail)
                 tvProductTitle.text = product.title
                 tvProductPrice.text = product.price.toString()
-                layoutProduct.setOnClickListener {
-                    onItemClick?.invoke(product.id)
-                }
-
                 setListener()
             }
         }
 
         private fun setListener() {
             binding.apply {
-                btnLike.setOnClickListener {
-                    if (product.isLiked) {
-                        btnLike.setImageResource(R.drawable.like_uncliked_icon)
-                    } else {
-                        btnLike.setImageResource(R.drawable.like_clicked_icon)
-                    }
-                    product.isLiked = !product.isLiked
+                layoutProduct.setOnClickListener {
+                    onItemClick?.invoke(product.id)
                 }
                 btnAdd.setOnClickListener {
                     if (product.isAdded) {
@@ -76,6 +68,7 @@ class ProductRecyclerAdapter :
                         btnAdd.setImageResource(R.drawable.added_button_icon)
                     }
                     product.isAdded = !product.isAdded
+                    saveProductClick?.invoke(product)
                 }
             }
         }

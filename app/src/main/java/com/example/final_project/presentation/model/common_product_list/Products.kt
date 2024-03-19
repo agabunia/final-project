@@ -6,9 +6,9 @@ data class Products(
     data class ProductDetailed(
         val id: Int,
         val title: String,
+        val description: String,
         val price: Int,
         val thumbnail: String,
-        var isLiked: Boolean = false,
         var isAdded: Boolean = false
     )
 }

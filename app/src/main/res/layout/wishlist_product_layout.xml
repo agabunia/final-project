@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/sivProductImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProductTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title"
+        app:layout_constraintStart_toEndOf="@+id/sivProductImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProductDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="djsakldjsakldsnakldnmdsadasdsadasdasdasdasdsasadasskalndaskldasdaddnaskl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sivProductImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDollarSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dollar_sign"
+        app:layout_constraintStart_toEndOf="@+id/sivProductImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductDescription" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="154"
+        app:layout_constraintStart_toEndOf="@+id/tvDollarSign"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductDescription" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvOneProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-1X"
+        app:layout_constraintStart_toEndOf="@+id/tvProductPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductDescription" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDollarSignBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dollar_sign"
+        app:layout_constraintStart_toEndOf="@+id/sivProductImage"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTotalProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="154"
+        app:layout_constraintStart_toEndOf="@+id/tvDollarSignBottom"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMinus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/button_oval_shape"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sivProductImage" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnMinus" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPlus"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/button_oval_shape"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvQuantity" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/trash_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

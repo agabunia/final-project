@@ -1,7 +1,7 @@
 package com.example.final_project.presentation.model.product
 
 data class ProductDetailed(
-    val id: String,
+    val id: Int,
     val title: String,
     val description: String,
     val price: Int,
@@ -12,5 +12,5 @@ data class ProductDetailed(
     val category: String,
     val thumbnail: String,
     val images: List<String>,
-    var isLiked: Boolean = false
+    var isAdded: Boolean = false
 )

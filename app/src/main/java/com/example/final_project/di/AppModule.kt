@@ -1,6 +1,10 @@
 package com.example.final_project.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.final_project.data.common.HandleResponse
+import com.example.final_project.data.local.dao.ProductDao
+import com.example.final_project.data.local.database.AppDatabase
 import com.example.final_project.data.remote.service.home.ProductByCategoryService
 import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
@@ -11,6 +15,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -106,6 +111,22 @@ object AppModule {
     @Provides
     fun provideProductByCategoryService(retrofit: Retrofit): ProductByCategoryService {
         return retrofit.create(ProductByCategoryService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java, "products_database"
+        )
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideProductDao(appDatabase: AppDatabase): ProductDao {
+        return appDatabase.productDao()
     }
 
 }

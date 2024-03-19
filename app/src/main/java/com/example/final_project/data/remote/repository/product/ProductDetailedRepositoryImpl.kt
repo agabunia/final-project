@@ -5,8 +5,8 @@ import com.example.final_project.data.common.Resource
 import com.example.final_project.data.remote.mapper.base.asResource
 import com.example.final_project.data.remote.mapper.product.toDomain
 import com.example.final_project.data.remote.service.product.ProductDetailedService
-import com.example.final_project.domain.model.product.GetProductDetailed
-import com.example.final_project.domain.repository.product.ProductDetailedRepository
+import com.example.final_project.domain.remote.model.product.GetProductDetailed
+import com.example.final_project.domain.remote.repository.product.ProductDetailedRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

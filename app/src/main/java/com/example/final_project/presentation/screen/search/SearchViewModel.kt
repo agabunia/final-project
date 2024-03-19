@@ -3,11 +3,13 @@ package com.example.final_project.presentation.screen.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
-import com.example.final_project.domain.usecase.search.GetProductSearchUseCase
-import com.example.final_project.domain.usecase.search.GetProductsUseCase
+import com.example.final_project.domain.local.usecase.db_manipulators.InsertProductInLocalUseCase
+import com.example.final_project.domain.remote.usecase.search.GetProductSearchUseCase
+import com.example.final_project.domain.remote.usecase.search.GetProductsUseCase
 import com.example.final_project.presentation.event.search.SearchEvent
+import com.example.final_project.presentation.mapper.common_product_list.toDomain
 import com.example.final_project.presentation.mapper.common_product_list.toPresenter
-import com.example.final_project.presentation.screen.login.LoginViewModel
+import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -21,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val getProductSearchUseCase: GetProductSearchUseCase,
-    private val getProductsUseCase: GetProductsUseCase
+    private val getProductsUseCase: GetProductsUseCase,
+    private val insertProductInLocalUseCase: InsertProductInLocalUseCase
 ) : ViewModel() {
 
     private val _searchState = MutableStateFlow(SearchState())
@@ -36,6 +39,7 @@ class SearchViewModel @Inject constructor(
             is SearchEvent.FetchSearchProducts -> fetchSearchProducts(search = event.search)
             is SearchEvent.MoveToDetailed -> navigateToDetailed()
             is SearchEvent.ResetErrorMessage -> errorMessage(message = null)
+            is SearchEvent.SaveProduct -> saveProductInDatabase(product = event.product)
         }
     }
 
@@ -94,6 +98,12 @@ class SearchViewModel @Inject constructor(
     private fun navigateToDetailed() {
         viewModelScope.launch {
             _uiEvent.emit(SearchUIEvent.NavigateToDetailed)
+        }
+    }
+
+    private fun saveProductInDatabase(product: Products.ProductDetailed) {
+        viewModelScope.launch {
+            insertProductInLocalUseCase(product = product.toDomain())
         }
     }
 

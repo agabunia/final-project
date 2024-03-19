@@ -1,6 +1,6 @@
 package com.example.final_project.presentation.mapper.product
 
-import com.example.final_project.domain.model.product.GetProductDetailed
+import com.example.final_project.domain.remote.model.product.GetProductDetailed
 import com.example.final_project.presentation.model.product.ProductDetailed
 
 fun GetProductDetailed.toPresenter(): ProductDetailed {
@@ -10,7 +10,7 @@ fun GetProductDetailed.toPresenter(): ProductDetailed {
         description = description,
         price = price,
         discountPercentage = discountPercentage,
-        rating = Math.round(rating),
+        rating = rating,
         stock = stock,
         brand = brand,
         category = category,

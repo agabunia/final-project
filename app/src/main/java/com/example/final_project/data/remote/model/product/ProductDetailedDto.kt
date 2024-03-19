@@ -4,7 +4,7 @@ import com.squareup.moshi.Json
 
 data class ProductDetailedDto(
     @Json(name = "id")
-    val id: String,
+    val id: Int,
     @Json(name = "title")
     val title: String,
     @Json(name = "description")

@@ -1,13 +1,12 @@
 package com.example.final_project.data.remote.repository.registration
 
 import android.util.Log.d
-import com.example.final_project.R
 import com.example.final_project.data.common.ErrorHandler
 import com.example.final_project.data.common.Resource
 import com.example.final_project.data.remote.mapper.registration.toDomain
 import com.example.final_project.data.remote.model.registration.RegistrationDto
-import com.example.final_project.domain.model.registration.GetRegistration
-import com.example.final_project.domain.repository.registration.RegistrationRepository
+import com.example.final_project.domain.remote.model.registration.GetRegistration
+import com.example.final_project.domain.remote.repository.registration.RegistrationRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.flow.Flow

@@ -6,8 +6,8 @@ import com.example.final_project.data.common.Resource
 import com.example.final_project.data.common.await
 import com.example.final_project.data.remote.mapper.login.toDomain
 import com.example.final_project.data.remote.model.login.LoginDto
-import com.example.final_project.domain.model.login.GetLogin
-import com.example.final_project.domain.repository.login.LoginRepository
+import com.example.final_project.domain.remote.model.login.GetLogin
+import com.example.final_project.domain.remote.repository.login.LoginRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.flow.Flow

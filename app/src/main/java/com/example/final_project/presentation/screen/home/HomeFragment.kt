@@ -75,6 +75,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         wrapperRecyclerAdapter.onWrapperItemClick = {
             navigateToProductDetails(id = it)
         }
+        wrapperRecyclerAdapter.onWrapperSaveProductClick = {
+            viewModel.onEvent(HomeEvent.SaveProduct(it))
+        }
         binding.apply {
             rvWrapper.layoutManager = LinearLayoutManager(requireContext())
             rvWrapper.setHasFixedSize(true)

@@ -1,7 +1,7 @@
 package com.example.final_project.data.remote.mapper.product
 
 import com.example.final_project.data.remote.model.product.ProductDetailedDto
-import com.example.final_project.domain.model.product.GetProductDetailed
+import com.example.final_project.domain.remote.model.product.GetProductDetailed
 
 fun ProductDetailedDto.toDomain(): GetProductDetailed {
     return GetProductDetailed(
@@ -10,7 +10,7 @@ fun ProductDetailedDto.toDomain(): GetProductDetailed {
         description = description,
         price = price,
         discountPercentage = discountPercentage,
-        rating = rating,
+        rating = Math.round(rating),
         stock = stock,
         brand = brand,
         category = category,

@@ -5,13 +5,16 @@ import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
-import com.example.final_project.domain.usecase.datastore.language.ChangeLanguageDataStoreUseCase
-import com.example.final_project.domain.usecase.datastore.language.GetLanguageDataStoreUseCase
-import com.example.final_project.domain.usecase.datastore.theme.ChangeThemeDataStoreUseCase
-import com.example.final_project.domain.usecase.datastore.theme.GetThemeDataStoreUseCase
-import com.example.final_project.domain.usecase.home.GetProductsByCategoryUseCase
+import com.example.final_project.domain.local.usecase.datastore.language.ChangeLanguageDataStoreUseCase
+import com.example.final_project.domain.local.usecase.datastore.language.GetLanguageDataStoreUseCase
+import com.example.final_project.domain.local.usecase.datastore.theme.ChangeThemeDataStoreUseCase
+import com.example.final_project.domain.local.usecase.datastore.theme.GetThemeDataStoreUseCase
+import com.example.final_project.domain.local.usecase.db_manipulators.InsertProductInLocalUseCase
+import com.example.final_project.domain.remote.usecase.home.GetProductsByCategoryUseCase
 import com.example.final_project.presentation.event.home.HomeEvent
+import com.example.final_project.presentation.mapper.common_product_list.toDomain
 import com.example.final_project.presentation.mapper.common_product_list.toPresenter
+import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.model.home.CategoryList
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
@@ -29,7 +32,8 @@ class HomeViewModel @Inject constructor(
     private val changeThemeDataStoreUseCase: ChangeThemeDataStoreUseCase,
     private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase,
     private val changeLanguageDataStoreUseCase: ChangeLanguageDataStoreUseCase,
-    private val getLanguageDataStoreUseCase: GetLanguageDataStoreUseCase
+    private val getLanguageDataStoreUseCase: GetLanguageDataStoreUseCase,
+    private val insertProductInLocalUseCase: InsertProductInLocalUseCase
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeState())
@@ -44,6 +48,7 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.ResetErrorMessage -> errorMessage(message = null)
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
             is HomeEvent.ChangeLanguage -> changeLanguage(isGeorgian = event.isGeorgian)
+            is HomeEvent.SaveProduct -> saveProductInDatabase(product = event.product)
         }
     }
 
@@ -129,6 +134,12 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun saveProductInDatabase(product: Products.ProductDetailed) {
+        viewModelScope.launch {
+            insertProductInLocalUseCase(product = product.toDomain())
         }
     }
 

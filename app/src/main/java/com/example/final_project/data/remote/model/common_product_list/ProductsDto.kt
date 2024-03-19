@@ -11,6 +11,8 @@ data class ProductsDto(
         val id: Int,
         @Json(name = "title")
         val title: String,
+        @Json(name = "description")
+        val description: String,
         @Json(name = "price")
         val price: Int,
         @Json(name = "thumbnail")

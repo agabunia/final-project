@@ -134,7 +134,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/like_uncliked_icon"
+                android:src="@drawable/add_button_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRateOff" />
 

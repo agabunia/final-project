@@ -21,17 +21,6 @@
         app:shapeAppearanceOverlay="@style/RoundedSquare" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btnLike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/like_uncliked_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

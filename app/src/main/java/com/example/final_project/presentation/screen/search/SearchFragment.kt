@@ -67,6 +67,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             navigateToProductDetails(it)
             d("searchFragmentTestClick", "$it")
         }
+        productRecyclerAdapter.saveProductClick = {
+            viewModel.onEvent(SearchEvent.SaveProduct(it))
+        }
         binding.apply {
             rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProduct.setHasFixedSize(true)

@@ -3,9 +3,14 @@ package com.example.final_project.presentation.screen.product
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.final_project.data.common.Resource
-import com.example.final_project.domain.usecase.product.GetProductDetailedUseCase
+import com.example.final_project.domain.local.usecase.db_manipulators.InsertProductInLocalUseCase
+import com.example.final_project.domain.remote.usecase.product.GetProductDetailedUseCase
 import com.example.final_project.presentation.event.product.ProductEvent
+import com.example.final_project.presentation.mapper.common_product_list.toDomain
+import com.example.final_project.presentation.mapper.product.toDomain
 import com.example.final_project.presentation.mapper.product.toPresenter
+import com.example.final_project.presentation.model.common_product_list.Products
+import com.example.final_project.presentation.model.product.ProductDetailed
 import com.example.final_project.presentation.state.product.ProductState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailedViewModel @Inject constructor(
-    private val getProductDetailedUseCase: GetProductDetailedUseCase
+    private val getProductDetailedUseCase: GetProductDetailedUseCase,
+    private val insertProductInLocalUseCase: InsertProductInLocalUseCase
 ) : ViewModel() {
 
     private val _productState = MutableStateFlow(ProductState())
@@ -27,6 +33,7 @@ class ProductDetailedViewModel @Inject constructor(
         when (event) {
             is ProductEvent.FetchProductDetailed -> fetchProductDetailed(id = event.id)
             is ProductEvent.ResetErrorMessage -> errorMessage(message = null)
+            is ProductEvent.SaveProduct -> saveProductInDatabase(product = event.product)
         }
     }
 
@@ -51,6 +58,12 @@ class ProductDetailedViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun saveProductInDatabase(product: ProductDetailed) {
+        viewModelScope.launch {
+            insertProductInLocalUseCase(product = product.toDomain())
         }
     }
 
