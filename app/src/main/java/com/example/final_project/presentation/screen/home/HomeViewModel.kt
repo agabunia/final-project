@@ -1,6 +1,5 @@
 package com.example.final_project.presentation.screen.home
 
-import android.util.Log
 import android.util.Log.d
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,12 +9,13 @@ import com.example.final_project.domain.local.usecase.datastore.language.GetLang
 import com.example.final_project.domain.local.usecase.datastore.theme.ChangeThemeDataStoreUseCase
 import com.example.final_project.domain.local.usecase.datastore.theme.GetThemeDataStoreUseCase
 import com.example.final_project.domain.local.usecase.db_manipulators.InsertProductInLocalUseCase
+import com.example.final_project.domain.remote.usecase.home.GetCategoryListUseCase
 import com.example.final_project.domain.remote.usecase.home.GetProductsByCategoryUseCase
 import com.example.final_project.presentation.event.home.HomeEvent
 import com.example.final_project.presentation.mapper.common_product_list.toDomain
 import com.example.final_project.presentation.mapper.common_product_list.toPresenter
 import com.example.final_project.presentation.model.common_product_list.Products
-import com.example.final_project.presentation.model.home.CategoryList
+import com.example.final_project.presentation.model.home.CategoryWrapperList
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +29,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getProductsByCategoryUseCase: GetProductsByCategoryUseCase,
+    private val getCategoryListUseCase: GetCategoryListUseCase,
     private val changeThemeDataStoreUseCase: ChangeThemeDataStoreUseCase,
     private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase,
     private val changeLanguageDataStoreUseCase: ChangeLanguageDataStoreUseCase,
@@ -45,6 +46,7 @@ class HomeViewModel @Inject constructor(
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.FetchProducts -> fetchProducts(categories = event.category)
+            is HomeEvent.FetchCategoryList -> fetchCategoryList()
             is HomeEvent.ResetErrorMessage -> errorMessage(message = null)
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
             is HomeEvent.ChangeLanguage -> changeLanguage(isGeorgian = event.isGeorgian)
@@ -57,7 +59,7 @@ class HomeViewModel @Inject constructor(
         getLanguage()
     }
 
-    private val productListsMap = mutableMapOf<String, List<CategoryList>>()
+    private val productListsMap = mutableMapOf<String, List<CategoryWrapperList>>()
 
     private fun fetchProducts(categories: List<String>) {
         viewModelScope.launch {
@@ -65,7 +67,8 @@ class HomeViewModel @Inject constructor(
                 getProductsByCategoryUseCase(category = category).collect {
                     when (it) {
                         is Resource.Success -> {
-                            val newList = listOf(CategoryList(category, it.data.toPresenter()))
+                            val newList =
+                                listOf(CategoryWrapperList(category, it.data.toPresenter()))
                             productListsMap[category] = newList
                             _homeState.update { currentState ->
                                 currentState.copy(
@@ -81,6 +84,28 @@ class HomeViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchCategoryList() {
+        viewModelScope.launch {
+            getCategoryListUseCase().collect {
+                when (it) {
+                    is Resource.Success -> {
+                        _homeState.update { currentState ->
+                            currentState.copy(categoryList = it.data)
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        errorMessage(message = it.errorMessage)
+                    }
+
+                    is Resource.Loading -> {
+                        _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                     }
                 }
             }

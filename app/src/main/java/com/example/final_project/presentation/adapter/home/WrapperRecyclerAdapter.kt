@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.databinding.CategoryWrapperLayoutBinding
 import com.example.final_project.presentation.adapter.common_product_adapter.ProductRecyclerAdapter
 import com.example.final_project.presentation.model.common_product_list.Products
-import com.example.final_project.presentation.model.home.CategoryList
+import com.example.final_project.presentation.model.home.CategoryWrapperList
 
 class WrapperRecyclerAdapter :
-    ListAdapter<CategoryList, WrapperRecyclerAdapter.WrapperViewHolder>(CategoryDiffUtil()) {
+    ListAdapter<CategoryWrapperList, WrapperRecyclerAdapter.WrapperViewHolder>(CategoryDiffUtil()) {
 
-    class CategoryDiffUtil : DiffUtil.ItemCallback<CategoryList>() {
-        override fun areItemsTheSame(oldItem: CategoryList, newItem: CategoryList): Boolean {
-            return oldItem.categoryName == newItem.categoryName
+    class CategoryDiffUtil : DiffUtil.ItemCallback<CategoryWrapperList>() {
+        override fun areItemsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: CategoryList, newItem: CategoryList): Boolean {
+        override fun areContentsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {
             return oldItem == newItem
         }
     }
@@ -38,7 +38,7 @@ class WrapperRecyclerAdapter :
 
     inner class WrapperViewHolder(private val binding: CategoryWrapperLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private lateinit var category: CategoryList
+        private lateinit var category: CategoryWrapperList
         private val productRecyclerAdapter = ProductRecyclerAdapter()
 
         init {

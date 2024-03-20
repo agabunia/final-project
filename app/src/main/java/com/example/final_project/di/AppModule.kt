@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.final_project.data.common.HandleResponse
 import com.example.final_project.data.local.dao.ProductDao
 import com.example.final_project.data.local.database.AppDatabase
+import com.example.final_project.data.remote.service.home.CategoryListService
 import com.example.final_project.data.remote.service.home.ProductByCategoryService
 import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
@@ -111,6 +112,12 @@ object AppModule {
     @Provides
     fun provideProductByCategoryService(retrofit: Retrofit): ProductByCategoryService {
         return retrofit.create(ProductByCategoryService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCategoryListService(retrofit: Retrofit): CategoryListService {
+        return retrofit.create(CategoryListService::class.java)
     }
 
     @Singleton
