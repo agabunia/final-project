@@ -34,4 +34,5 @@
 
     <string name="buy_now_price">Buy Now $</string>
     <string name="about_us">About Us</string>
+    <string name="notification_channel">push_notification_channel</string>
 </resources>

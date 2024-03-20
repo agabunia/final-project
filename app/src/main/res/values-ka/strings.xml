@@ -35,4 +35,5 @@
 
     <string name="buy_now_price">ყიდვა $</string>
     <string name="about_us">ჩვენ შესახებ</string>
+    <string name="notification_channel">push_notification_channel</string>
 </resources>
