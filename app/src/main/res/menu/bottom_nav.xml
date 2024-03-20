@@ -13,10 +13,6 @@
         android:icon="@drawable/wishlist_icon"
         android:title="@string/wishlist" />
     <item
-        android:id="@+id/favoritesFragment"
-        android:icon="@drawable/heart_icon"
-        android:title="@string/favorites" />
-    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/account_icon"
         android:title="@string/profile" />

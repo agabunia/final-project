@@ -63,11 +63,6 @@
             app:destination="@id/productDetailedFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="com.example.final_project.presentation.screen.favorites.FavoritesFragment"
-        android:label="fragment_library"
-        tools:layout="@layout/fragment_favorites" />
-    <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.final_project.presentation.screen.search.SearchFragment"
         android:label="fragment_search"
@@ -81,11 +76,6 @@
         android:name="com.example.final_project.presentation.screen.profile.ProfileFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.final_project.presentation.screen.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/productDetailedFragment"
         android:name="com.example.final_project.presentation.screen.product.ProductDetailedFragment"

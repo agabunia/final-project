@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/settingsFragment"
-        android:title="Settings" />
-
     <item android:title="@string/theme">
         <menu>
             <item
                 android:id="@+id/language"
-                app:actionLayout="@layout/language_switch_layout"
-                android:title="@string/language" />
+                android:title="@string/language"
+                app:actionLayout="@layout/language_switch_layout" />
             <item
                 android:id="@+id/themeMode"
                 android:title="@string/dark_mode"
@@ -27,4 +23,7 @@
                 android:title="@string/rate_us" />
         </menu>
     </item>
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="@string/about_us" />
 </menu>
