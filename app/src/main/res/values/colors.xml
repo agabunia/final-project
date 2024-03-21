@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+
     <color name="white">#FFFFFFFF</color>
     <color name="background">#FF000000</color>
     <color name="input_color">#1B1A1A</color>
     <color name="hint">#989696</color>
     <color name="button_blue">#034981</color>
     <color name="genre">#F0EAEA</color>
-    <color name="grey">#9E9D9D</color>
+
     <color name="yellowish">#DDD9B2</color>
     <color name="red">#F44336</color>
     <color name="yellow">#FFEB3B</color>
@@ -18,6 +18,15 @@
     <color name="green">#01534C</color>
 
     <color name="blue">#01589E</color>
+
+
+
+
+    <color name="milky">#F9F9F9</color>
+    <color name="black">#FF000000</color>
+    <color name="lightBlue">#E6F7FA</color>
+    <color name="grey">#8F8B8B</color>
+    <color name="sky">#E6166BFF</color>
     <color name="greenish">#083721</color>
 
 </resources>

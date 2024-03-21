@@ -36,4 +36,10 @@
     <string name="buy_now_price">ყიდვა $</string>
     <string name="about_us">ჩვენ შესახებ</string>
     <string name="notification_channel">push_notification_channel</string>
+    <string name="buy_now">ყიდვა</string>
+    <string name="add_to_wishlist">დაამატე სიაში</string>
+    <string name="plus_sign">+</string>
+    <string name="_1">1</string>
+    <string name="minus_sign">-</string>
+    <string name="delete_all">ყველას წაშლა</string>
 </resources>

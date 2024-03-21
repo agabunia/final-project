@@ -7,6 +7,11 @@
 
     <style name="LoginTextInputOuterFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusTopStart">15dp</item>
+        <item name="boxCornerRadiusTopEnd">15dp</item>
+        <item name="boxCornerRadiusBottomStart">15dp</item>
+        <item name="boxCornerRadiusBottomEnd">15dp</item>
+        <item name="boxStrokeWidth">2dp</item>
     </style>
 
     <style name="LoginTextInputInnerFieldStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -40,6 +45,18 @@
     <!--    light mode drawer screen background color       -->
     <style name="drawerScreenBackground">
         <item name="android:background">@color/blueish</item>
+    </style>
+    
+    <!--      light mode button color  -->
+    <style name="MainImageButtonTheme" parent="Theme.AppCompat">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="MainButtonStyle">
+        <item name="android:background">@drawable/button_shape_light</item>
+    </style>
+    <style name="QuantityChangeButtonStyle">
+        <item name="android:background">@drawable/button_oval_shape_light</item>
     </style>
 
 

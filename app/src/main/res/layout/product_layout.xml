@@ -22,14 +22,15 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         android:src="@drawable/add_button_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sivProductImage" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvProductTitle"
@@ -40,8 +41,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="Title"
-        android:textColor="@color/white"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvDollarSign"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="$"
-        android:textColor="@color/white"
+        android:text="@string/dollar_sign"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="150"
-        android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDollarSign"

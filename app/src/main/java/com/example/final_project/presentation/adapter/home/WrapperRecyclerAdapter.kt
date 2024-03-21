@@ -16,7 +16,7 @@ class WrapperRecyclerAdapter :
 
     class CategoryDiffUtil : DiffUtil.ItemCallback<CategoryWrapperList>() {
         override fun areItemsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {
-            return oldItem == newItem
+            return oldItem.categoryName == newItem.categoryName
         }
 
         override fun areContentsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {

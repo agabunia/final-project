@@ -83,7 +83,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             rvWrapper.setHasFixedSize(true)
             rvWrapper.adapter = wrapperRecyclerAdapter
         }
-        viewModel.onEvent(HomeEvent.FetchCategoryList)
+//        viewModel.onEvent(HomeEvent.FetchCategoryList)
+        val list = listOf(
+            "smartphones",
+            "laptops",
+            "fragrances",
+            "skincare",
+            "groceries",
+            "home-decoration",
+            "furniture",
+            "tops",
+            "womens-dresses",
+            "womens-shoes",
+            "mens-shirts",
+            "mens-shoes",
+            "mens-watches",
+            "womens-watches",
+            "womens-bags",
+            "womens-jewellery",
+            "sunglasses",
+            "automotive",
+            "motorcycle",
+            "lighting"
+        )
+        viewModel.onEvent(HomeEvent.FetchProducts(list))
     }
 
     private fun handleState(state: HomeState) {
@@ -94,7 +117,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             wrapperRecyclerAdapter.submitList(it)
         }
         state.categoryList?.let {
-            viewModel.onEvent(HomeEvent.FetchProducts(it))
+//            viewModel.onEvent(HomeEvent.FetchProducts(it))
         }
 
         state.errorMessage?.let {

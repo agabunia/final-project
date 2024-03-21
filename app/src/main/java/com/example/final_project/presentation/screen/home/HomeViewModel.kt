@@ -19,6 +19,7 @@ import com.example.final_project.presentation.model.home.CategoryWrapperList
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -59,20 +60,16 @@ class HomeViewModel @Inject constructor(
         getLanguage()
     }
 
-    private val productListsMap = mutableMapOf<String, List<CategoryWrapperList>>()
-
     private fun fetchProducts(categories: List<String>) {
         viewModelScope.launch {
             for (category in categories) {
                 getProductsByCategoryUseCase(category = category).collect {
                     when (it) {
                         is Resource.Success -> {
-                            val newList =
-                                listOf(CategoryWrapperList(category, it.data.toPresenter()))
-                            productListsMap[category] = newList
                             _homeState.update { currentState ->
                                 currentState.copy(
-                                    productsList = productListsMap.values.flatten()
+                                    productsList = currentState.productsList.orEmpty() +
+                                            CategoryWrapperList(category, it.data.toPresenter())
                                 )
                             }
                         }
@@ -95,6 +92,7 @@ class HomeViewModel @Inject constructor(
             getCategoryListUseCase().collect {
                 when (it) {
                     is Resource.Success -> {
+                        d("fetched", "category: ${it.data}")
                         _homeState.update { currentState ->
                             currentState.copy(categoryList = it.data)
                         }

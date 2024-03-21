@@ -82,6 +82,10 @@ class MainActivity : AppCompatActivity() {
 //        if (redirect != null) {
 //            d("receivedProductId", redirect)
 //        }
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(R.id.fragmentContainerView, ProductDetailedFragment())
+//            commit()
+//        }
     }
 
 

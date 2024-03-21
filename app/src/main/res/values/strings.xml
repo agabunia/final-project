@@ -35,4 +35,11 @@
     <string name="buy_now_price">Buy Now $</string>
     <string name="about_us">About Us</string>
     <string name="notification_channel">push_notification_channel</string>
+    <string name="buy_now">Buy now</string>
+    <string name="add_to_wishlist">Add to wishlist</string>
+    <string name="plus_sign">+</string>
+    <string name="_1">1</string>
+    <string name="minus_sign">-</string>
+    <string name="delete_all">Delete All</string>
+    <string name="_1x">-1X</string>
 </resources>

@@ -89,14 +89,7 @@ class ProductDetailedFragment :
             setViewPagerAdapter(product.images)
             setStarRecyclerAdapter(product.rating)
 
-            btnLike.setOnClickListener {
-                if (product.isAdded) {
-                    btnLike.setImageResource(R.drawable.add_button_icon)
-                } else {
-                    btnLike.setImageResource(R.drawable.added_button_icon)
-                }
-                product.isAdded = !product.isAdded
-
+            btnAddToWishlist.setOnClickListener {
                 viewModel.onEvent(ProductEvent.SaveProduct(product))
             }
         }

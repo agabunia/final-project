@@ -8,13 +8,14 @@
     android:paddingHorizontal="10dp"
     tools:context=".presentation.screen.product.ProductDetailedFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
-        android:text="back" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_back_arrow" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:text="title"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:text="brand"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +60,7 @@
                 android:id="@+id/rvStar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductBrand" />
 
@@ -67,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:maxLines="2"
                 android:text="description"
                 android:textSize="20sp"
@@ -79,7 +81,7 @@
                 android:id="@+id/tvDollarSign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/dollar_sign"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toStartOf="@+id/tvProductPrice"
@@ -89,7 +91,7 @@
                 android:id="@+id/tvProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
                 android:text="230"
                 android:textSize="22sp"
@@ -100,7 +102,7 @@
                 android:id="@+id/tvProductDiscountRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:text="15"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/tvRateSign"
@@ -110,7 +112,7 @@
                 android:id="@+id/tvRateSign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/percent_sign"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/tvRateOff"
@@ -120,23 +122,12 @@
                 android:id="@+id/tvRateOff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:text="@string/off"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductPrice" />
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/btnLike"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="10dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/add_button_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvRateOff" />
 
             <View
                 android:id="@+id/viewHorizontalLine"
@@ -193,14 +184,71 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvProductCategory" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAddToWishlist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="add to  wishlist"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/btnMinus"
+                style="@style/QuantityChangeButtonStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:paddingBottom="2dp"
+                android:text="@string/minus_sign"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:theme="@style/MainImageButtonTheme"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvStock" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/_1"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/btnMinus"
+                app:layout_constraintTop_toBottomOf="@+id/tvStock" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPlus"
+                style="@style/QuantityChangeButtonStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="9dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:paddingBottom="1dp"
+                android:text="@string/plus_sign"
+                android:textSize="25sp"
+                android:theme="@style/MainImageButtonTheme"
+                app:layout_constraintStart_toEndOf="@+id/tvQuantity"
+                app:layout_constraintTop_toBottomOf="@+id/tvStock" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddToWishlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_shape_for_wishlist"
+                android:paddingHorizontal="10dp"
+                android:text="@string/add_to_wishlist"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnMinus" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBuyNow"
+                style="@style/MainButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/buy_now"
+                android:textColor="@color/white"
+                android:theme="@style/MainImageButtonTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnAddToWishlist"
+                app:layout_constraintTop_toBottomOf="@+id/btnMinus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
