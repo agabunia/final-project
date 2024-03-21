@@ -1,7 +1,14 @@
 package com.example.final_project.di
 
+import android.app.Application
+import android.content.Context
+import com.android.volley.BuildConfig
 import com.example.final_project.data.common.HandleResponse
 import com.example.final_project.data.remote.service.access_token.AccessTokenService
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.firebase.auth.FirebaseAuth
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -24,6 +31,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
 
     @Provides
     @Singleton
@@ -87,6 +95,27 @@ object AppModule {
     @Provides
     fun provideAccessTokenService(retrofit: Retrofit): AccessTokenService {
         return retrofit.create(AccessTokenService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideContext(application: Application): Context {
+        return application.applicationContext
+    }
+
+    @Provides
+    @Singleton
+    fun providePlacesClient(context: Context): PlacesClient {
+        Places.initialize(context, API_KEY)
+        return Places.createClient(context)
+    }
+
+    private const val API_KEY = "AIzaSyDDZb_78Hmm3PLzs8KVQc0NZOe-HD0rIMQ"
+
+    @Provides
+    @Singleton
+    fun provideFusedLocationProviderClient(context: Context): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(context)
     }
 
 }

@@ -1,14 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_gray_for_background"
     tools:context=".presentation.screen.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Account fragment" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_back"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/profileBackground"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_back" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back_edit"
+        android:contentDescription="Back button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="-25dp"
+        android:layout_marginEnd="12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/circle"
+        app:layout_constraintEnd_toEndOf="@id/profileBackground"
+        app:layout_constraintTop_toBottomOf="@id/profileBackground" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/editPencil"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/back_edit"
+        app:layout_constraintEnd_toEndOf="@id/back_edit"
+        app:layout_constraintStart_toStartOf="@id/back_edit"
+        app:layout_constraintTop_toTopOf="@+id/back_edit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:text="Nintsa Kemularia"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileBackground" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:text="+995 589 78 54 25"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvUsername" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@color/dart_gray_for_bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/phone" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icProfile"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/edit_profile"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icProfile"
+        app:layout_constraintTop_toTopOf="@id/icProfile" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnEditProfile"
+        android:contentDescription="When you click on it, you open edit profile page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_next"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvProfile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvProfile" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icAddress"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintEnd_toEndOf="@id/icProfile"
+        app:layout_constraintStart_toStartOf="@id/icProfile"
+        app:layout_constraintTop_toBottomOf="@id/icProfile" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddress"
+        android:contentDescription="When you click on it, you open address page"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/address"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icAddress"
+        app:layout_constraintTop_toTopOf="@id/icAddress" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnAddress"
+        android:contentDescription="When you click on it, you open address page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_next"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvAddress" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icWallet"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_wallet"
+        app:layout_constraintEnd_toEndOf="@id/icAddress"
+        app:layout_constraintStart_toStartOf="@id/icAddress"
+        app:layout_constraintTop_toBottomOf="@id/icAddress" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/payment"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icWallet"
+        app:layout_constraintTop_toTopOf="@id/icWallet" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnPayment"
+        android:contentDescription="When you click on it, you open payment page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_next"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvPayment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvPayment"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icSecurity"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_security"
+        app:layout_constraintEnd_toEndOf="@id/icWallet"
+        app:layout_constraintStart_toStartOf="@id/icWallet"
+        app:layout_constraintTop_toBottomOf="@id/icWallet" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSecurity"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/security"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icSecurity"
+        app:layout_constraintTop_toTopOf="@id/icSecurity" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnSecurity"
+        android:contentDescription="When you click on it, you open security page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_next"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvSecurity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvSecurity" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icPrivacy"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_privacy_policy"
+        app:layout_constraintEnd_toEndOf="@id/icSecurity"
+        app:layout_constraintStart_toStartOf="@id/icSecurity"
+        app:layout_constraintTop_toBottomOf="@id/icSecurity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvPrivacy"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/privacy_policy"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icPrivacy"
+        app:layout_constraintTop_toTopOf="@id/icPrivacy" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnPrivacy"
+        android:contentDescription="When you click on it, you open privacy page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/ic_next"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/tvPrivacy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvPrivacy" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icLogout"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toEndOf="@id/icPrivacy"
+        app:layout_constraintStart_toStartOf="@id/icPrivacy"
+        app:layout_constraintTop_toBottomOf="@id/icPrivacy" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/log_out"
+        android:textColor="@color/red"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@id/icLogout"
+        app:layout_constraintTop_toTopOf="@id/icLogout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
