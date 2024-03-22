@@ -12,6 +12,8 @@ import com.example.final_project.presentation.mapper.common_product_list.toPrese
 import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -36,7 +38,7 @@ class SearchViewModel @Inject constructor(
     fun onEvent(event: SearchEvent) {
         when (event) {
             is SearchEvent.FetchAllProducts -> fetchProducts()
-            is SearchEvent.FetchSearchProducts -> fetchSearchProducts(search = event.search)
+            is SearchEvent.FetchSearchProducts -> fetchSearchedProducts(search = event.search)
             is SearchEvent.MoveToDetailed -> navigateToDetailed(id = event.id)
             is SearchEvent.ResetErrorMessage -> errorMessage(message = null)
             is SearchEvent.SaveProduct -> saveProductInDatabase(product = event.product)
@@ -67,29 +69,65 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun fetchSearchProducts(search: String) {
-        viewModelScope.launch {
-            getProductSearchUseCase(search = search).collect {
-                when (it) {
-                    is Resource.Success -> {
-                        _searchState.update { currentState ->
-                            currentState.copy(productsList = it.data.toPresenter().products)
-                        }
-                    }
+    private var searchNameJob: Job? = null
 
-                    is Resource.Error -> {
-                        errorMessage(message = it.errorMessage)
-                    }
+    private fun fetchSearchedProducts(search: String) {
+        with(search) {
+            when {
+                isBlank() -> fetchProducts()
+                length > 1 -> {
+                    searchNameJob?.cancel()
+                    searchNameJob = viewModelScope.launch {
+                        delay(500)
+                        getProductSearchUseCase(search = search).collect {
+                            when (it) {
+                                is Resource.Success -> {
+                                    _searchState.update { currentState ->
+                                        currentState.copy(productsList = it.data.toPresenter().products)
+                                    }
+                                }
 
-                    is Resource.Loading -> {
-                        _searchState.update { currentState ->
-                            currentState.copy(isLoading = it.loading)
+                                is Resource.Error -> {
+                                    errorMessage(message = it.errorMessage)
+                                }
+
+                                is Resource.Loading -> {
+                                    _searchState.update { currentState ->
+                                        currentState.copy(isLoading = it.loading)
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+//    Old code delete after nika
+//    private fun fetchSearchProducts(search: String) {
+//        viewModelScope.launch {
+//            getProductSearchUseCase(search = search).collect {
+//                when (it) {
+//                    is Resource.Success -> {
+//                        _searchState.update { currentState ->
+//                            currentState.copy(productsList = it.data.toPresenter().products)
+//                        }
+//                    }
+//
+//                    is Resource.Error -> {
+//                        errorMessage(message = it.errorMessage)
+//                    }
+//
+//                    is Resource.Loading -> {
+//                        _searchState.update { currentState ->
+//                            currentState.copy(isLoading = it.loading)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     private fun errorMessage(message: String?) {
         _searchState.update { currentState -> currentState.copy(errorMessage = message) }

@@ -2,7 +2,10 @@ package com.example.final_project.presentation.screen.search
 
 import android.util.Log.d
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -31,15 +34,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     override fun bindListeners() {
-        binding.btnSearch.setOnClickListener {
+//        Old code check with nika
+//        binding.btnSearch.setOnClickListener {
+//            val search = binding.etSearch.text.toString()
+//            if (search.isNotEmpty()) {
+//                viewModel.onEvent(SearchEvent.FetchSearchProducts(search))
+//                binding.etSearch.text?.clear().toString()
+//            } else {
+//                viewModel.onEvent(SearchEvent.FetchAllProducts)
+//            }
+//            it.hideKeyboard()
+//        }
+
+        binding.etSearch.doAfterTextChanged {
             val search = binding.etSearch.text.toString()
-            if (search.isNotEmpty()) {
-                viewModel.onEvent(SearchEvent.FetchSearchProducts(search))
-                binding.etSearch.text?.clear().toString()
-            } else {
-                viewModel.onEvent(SearchEvent.FetchAllProducts)
-            }
-            it.hideKeyboard()
+            viewModel.onEvent(SearchEvent.FetchSearchProducts(search))
         }
     }
 
@@ -65,7 +74,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         productRecyclerAdapter = ProductRecyclerAdapter()
         productRecyclerAdapter.onItemClick = {
             navigateToProductDetails(it)
-            d("searchFragmentTestClick", "$it")
         }
         productRecyclerAdapter.saveProductClick = {
             viewModel.onEvent(SearchEvent.SaveProduct(it))
