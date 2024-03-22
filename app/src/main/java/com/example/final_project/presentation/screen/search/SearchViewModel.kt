@@ -104,31 +104,6 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-//    Old code delete after nika
-//    private fun fetchSearchProducts(search: String) {
-//        viewModelScope.launch {
-//            getProductSearchUseCase(search = search).collect {
-//                when (it) {
-//                    is Resource.Success -> {
-//                        _searchState.update { currentState ->
-//                            currentState.copy(productsList = it.data.toPresenter().products)
-//                        }
-//                    }
-//
-//                    is Resource.Error -> {
-//                        errorMessage(message = it.errorMessage)
-//                    }
-//
-//                    is Resource.Loading -> {
-//                        _searchState.update { currentState ->
-//                            currentState.copy(isLoading = it.loading)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     private fun errorMessage(message: String?) {
         _searchState.update { currentState -> currentState.copy(errorMessage = message) }
     }

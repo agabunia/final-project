@@ -34,18 +34,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     override fun bindListeners() {
-//        Old code check with nika
-//        binding.btnSearch.setOnClickListener {
-//            val search = binding.etSearch.text.toString()
-//            if (search.isNotEmpty()) {
-//                viewModel.onEvent(SearchEvent.FetchSearchProducts(search))
-//                binding.etSearch.text?.clear().toString()
-//            } else {
-//                viewModel.onEvent(SearchEvent.FetchAllProducts)
-//            }
-//            it.hideKeyboard()
-//        }
-
         binding.etSearch.doAfterTextChanged {
             val search = binding.etSearch.text.toString()
             viewModel.onEvent(SearchEvent.FetchSearchProducts(search))
