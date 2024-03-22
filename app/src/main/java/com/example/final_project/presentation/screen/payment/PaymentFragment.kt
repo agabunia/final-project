@@ -66,8 +66,8 @@ class PaymentFragment : BaseFragment<FragmentPaymentBinding>(FragmentPaymentBind
 
     private fun handleUiEvent(event: PaymentViewModel.UIEvent) {
         when (event) {
-            is PaymentViewModel.UIEvent.navigateToHome -> navigateToHome()
-            is PaymentViewModel.UIEvent.navigateBack -> goBack()
+            is PaymentViewModel.UIEvent.NavigateToHome -> navigateToHome()
+            is PaymentViewModel.UIEvent.NavigateBack -> goBack()
         }
     }
 

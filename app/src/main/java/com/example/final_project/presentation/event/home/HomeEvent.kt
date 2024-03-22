@@ -9,4 +9,5 @@ sealed class HomeEvent {
     data class ChangeTheme(val isLight: Boolean) : HomeEvent()
     data class ChangeLanguage(val isGeorgian: Boolean) : HomeEvent()
     data class SaveProduct(var product: Products.ProductDetailed): HomeEvent()
+    data class MoveToDetailed(val id: Int): HomeEvent()
 }

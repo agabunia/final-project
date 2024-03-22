@@ -52,13 +52,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
         }
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                viewModel.uiEvent.collect {
-//                    handleNavigationEvent(it)
-//                }
-//            }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    handleNavigationEvent(it)
+                }
+            }
+        }
     }
 
     private fun setProductAdapter() {
@@ -96,11 +96,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-//    private fun handleNavigationEvent(event: SearchViewModel.SearchUIEvent) {
-//        when(event) {
-//            is SearchViewModel.SearchUIEvent.NavigateToDetailed -> nav
-//        }
-//    }
+    private fun handleNavigationEvent(event: SearchViewModel.SearchUIEvent) {
+        when (event) {
+            is SearchViewModel.SearchUIEvent.NavigateToDetailed -> navigateToProductDetails(id = event.id)
+        }
+    }
 
     private fun navigateToProductDetails(id: Int) {
         val action = SearchFragmentDirections.actionSearchFragmentToProductDetailedFragment(id = id)

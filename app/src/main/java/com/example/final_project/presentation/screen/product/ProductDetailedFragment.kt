@@ -48,7 +48,7 @@ class ProductDetailedFragment :
 
     override fun bindListeners() {
         binding.btnBack.setOnClickListener {
-            goBack()
+            viewModel.onEvent(ProductEvent.NavigateBack)
         }
 
         binding.btnMinus.setOnClickListener {
@@ -77,7 +77,7 @@ class ProductDetailedFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiEvent.collect {
-                    handleUiState(it)
+                    handleUiEvent(it)
                 }
             }
         }
@@ -97,9 +97,10 @@ class ProductDetailedFragment :
             if (state.isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun handleUiState(event: ProductDetailedViewModel.UIEvent) {
+    private fun handleUiEvent(event: ProductDetailedViewModel.UIEvent) {
         when (event) {
             is ProductDetailedViewModel.UIEvent.navigateToPayment -> navigateToPayment(event.isSuccessful)
+            is ProductDetailedViewModel.UIEvent.NavigateBack -> goBack()
         }
     }
 

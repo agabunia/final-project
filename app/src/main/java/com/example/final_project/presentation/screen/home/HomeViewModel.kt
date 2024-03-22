@@ -16,10 +16,12 @@ import com.example.final_project.presentation.mapper.common_product_list.toDomai
 import com.example.final_project.presentation.mapper.common_product_list.toPresenter
 import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.model.home.CategoryWrapperList
+import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,6 +46,9 @@ class HomeViewModel @Inject constructor(
     private val _appState = MutableStateFlow(AppState())
     val appState: SharedFlow<AppState> = _appState.asStateFlow()
 
+    private val _uiEvent = MutableSharedFlow<UIEvent>()
+    val uiEvent: SharedFlow<UIEvent> get() = _uiEvent
+
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.FetchProducts -> fetchProducts(categories = event.category)
@@ -52,6 +57,7 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
             is HomeEvent.ChangeLanguage -> changeLanguage(isGeorgian = event.isGeorgian)
             is HomeEvent.SaveProduct -> saveProductInDatabase(product = event.product)
+            is HomeEvent.MoveToDetailed -> navigateToDetailed(id = event.id)
         }
     }
 
@@ -164,6 +170,16 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             insertProductInLocalUseCase(product = product.toDomain())
         }
+    }
+
+    private fun navigateToDetailed(id: Int) {
+        viewModelScope.launch {
+            _uiEvent.emit(UIEvent.NavigateToDetailed(id = id))
+        }
+    }
+
+    sealed interface UIEvent {
+        data class NavigateToDetailed(val id: Int) : UIEvent
     }
 
 }

@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(
         when (event) {
             is SearchEvent.FetchAllProducts -> fetchProducts()
             is SearchEvent.FetchSearchProducts -> fetchSearchProducts(search = event.search)
-            is SearchEvent.MoveToDetailed -> navigateToDetailed()
+            is SearchEvent.MoveToDetailed -> navigateToDetailed(id = event.id)
             is SearchEvent.ResetErrorMessage -> errorMessage(message = null)
             is SearchEvent.SaveProduct -> saveProductInDatabase(product = event.product)
         }
@@ -95,9 +95,9 @@ class SearchViewModel @Inject constructor(
         _searchState.update { currentState -> currentState.copy(errorMessage = message) }
     }
 
-    private fun navigateToDetailed() {
+    private fun navigateToDetailed(id: Int) {
         viewModelScope.launch {
-            _uiEvent.emit(SearchUIEvent.NavigateToDetailed)
+            _uiEvent.emit(SearchUIEvent.NavigateToDetailed(id = id))
         }
     }
 
@@ -108,7 +108,7 @@ class SearchViewModel @Inject constructor(
     }
 
     sealed interface SearchUIEvent {
-        object NavigateToDetailed : SearchUIEvent
+        data class NavigateToDetailed(val id: Int) : SearchUIEvent
     }
 
 }

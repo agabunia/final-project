@@ -41,18 +41,18 @@ class PaymentViewModel @Inject constructor() : ViewModel() {
 
     private fun navigateToHome() {
         viewModelScope.launch {
-            _uiEvent.emit(UIEvent.navigateToHome)
+            _uiEvent.emit(UIEvent.NavigateToHome)
         }
     }
 
     private fun navigateBack() {
         viewModelScope.launch {
-            _uiEvent.emit(UIEvent.navigateBack)
+            _uiEvent.emit(UIEvent.NavigateBack)
         }
     }
 
     sealed interface UIEvent {
-        object navigateToHome : UIEvent
-        object navigateBack : UIEvent
+        object NavigateToHome : UIEvent
+        object NavigateBack : UIEvent
     }
 }

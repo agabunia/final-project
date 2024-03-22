@@ -21,6 +21,8 @@ import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.home.WrapperRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.home.HomeEvent
+import com.example.final_project.presentation.screen.search.SearchFragmentDirections
+import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import com.google.android.material.navigation.NavigationView
@@ -63,8 +65,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.appState.collect {
-                    d("homeTest", "fragment uievent: $it")
                     handleAppStateChange(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    handleNavigationEvent(it)
                 }
             }
         }
@@ -73,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun setWrapperAdapter() {
         wrapperRecyclerAdapter = WrapperRecyclerAdapter()
         wrapperRecyclerAdapter.onWrapperItemClick = {
-            navigateToProductDetails(id = it)
+            viewModel.onEvent(HomeEvent.MoveToDetailed(id = it))
         }
         wrapperRecyclerAdapter.onWrapperSaveProductClick = {
             viewModel.onEvent(HomeEvent.SaveProduct(it))
@@ -129,10 +138,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    private fun navigateToProductDetails(id: Int) {
-        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailedFragment(id = id)
-        findNavController().navigate(action)
-    }
 
     private fun setChangeSwitch() {
         val navigationView = activity?.findViewById<NavigationView>(R.id.drawerMenu)
@@ -183,6 +188,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 )
             )
         }
+    }
+
+    private fun handleNavigationEvent(event: HomeViewModel.UIEvent) {
+        when (event) {
+            is HomeViewModel.UIEvent.NavigateToDetailed -> navigateToProductDetails(id = event.id)
+        }
+    }
+
+    private fun navigateToProductDetails(id: Int) {
+        val action = HomeFragmentDirections.actionHomeFragmentToProductDetailedFragment(id = id)
+        findNavController().navigate(action)
     }
 
 }

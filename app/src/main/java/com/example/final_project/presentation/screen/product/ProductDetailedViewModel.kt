@@ -13,6 +13,7 @@ import com.example.final_project.presentation.mapper.product.toPresenter
 import com.example.final_project.presentation.model.common_product_list.Products
 import com.example.final_project.presentation.model.product.ProductDetailed
 import com.example.final_project.presentation.screen.login.LoginViewModel
+import com.example.final_project.presentation.screen.payment.PaymentViewModel
 import com.example.final_project.presentation.state.product.ProductState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -42,6 +43,7 @@ class ProductDetailedViewModel @Inject constructor(
             is ProductEvent.ResetErrorMessage -> errorMessage(message = null)
             is ProductEvent.SaveProduct -> saveProductInDatabase(product = event.product)
             is ProductEvent.BuyProduct -> buyProduct(amount = event.amount)
+            is ProductEvent.NavigateBack -> navigateBack()
         }
     }
 
@@ -90,12 +92,19 @@ class ProductDetailedViewModel @Inject constructor(
         }
     }
 
+    private fun navigateBack() {
+        viewModelScope.launch {
+            _uiEvent.emit(UIEvent.NavigateBack)
+        }
+    }
+
     private fun errorMessage(message: String?) {
         _productState.update { currentState -> currentState.copy(errorMessage = message) }
     }
 
-    sealed class UIEvent() {
-        data class navigateToPayment(val isSuccessful: Boolean) : UIEvent()
+    sealed interface UIEvent {
+        data class navigateToPayment(val isSuccessful: Boolean) : UIEvent
+        object NavigateBack: UIEvent
     }
 
 }
