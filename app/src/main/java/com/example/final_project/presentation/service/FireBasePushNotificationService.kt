@@ -2,6 +2,7 @@ package com.example.final_project.presentation.service
 
 import android.Manifest
 import android.app.PendingIntent
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -24,7 +25,8 @@ class FireBasePushNotificationService : FirebaseMessagingService() {
         val data = message.data
         showNotification(
             id = data["id"] ?: "1",
-            title = data["title"] ?: ""
+            title = data["title"] ?: "",
+            description = data["description"] ?: ""
         )
     }
 
@@ -32,29 +34,24 @@ class FireBasePushNotificationService : FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
-    private fun showNotification(id: String, title: String) {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("product_id", id)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    private fun showNotification(id: String, title: String, description: String) {
+        val bundle = Bundle().apply {
+            putInt("id", id.toInt())
         }
-        val pendingIntent: PendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-//        val bundle = Bundle().apply {
-//            putInt("product_id", id.toInt())
-//        }
-//
-//        val pendingIntent = NavDeepLinkBuilder(applicationContext)
-//            .setComponentName(MainActivity::class.java)
-//            .setGraph(R.navigation.nav_graph)
-//            .setDestination(R.id.productDetailedFragment)
-//            .setArguments(bundle)
-//            .createPendingIntent()
+        val pendingIntent = NavDeepLinkBuilder(applicationContext)
+            .setComponentName(MainActivity::class.java)
+            .setGraph(R.navigation.nav_graph)
+            .setDestination(R.id.productDetailedFragment)
+            .setArguments(bundle)
+            .createPendingIntent()
 
         val notification = NotificationCompat.Builder(applicationContext, "channel_id")
             .setContentTitle(title)
+            .setContentText(description)
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setAutoCancel(true) // Automatically dismiss the notification when clicked
             .build()
 
         if (ContextCompat.checkSelfPermission(
@@ -65,6 +62,7 @@ class FireBasePushNotificationService : FirebaseMessagingService() {
             NotificationManagerCompat.from(applicationContext)
                 .notify(id.toInt(), notification)
         }
+
     }
 
 }

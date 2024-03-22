@@ -4,7 +4,6 @@ import com.example.final_project.presentation.model.home.CategoryWrapperList
 
 data class HomeState(
     val productsList: List<CategoryWrapperList>? = null,
-    val categoryList: List<String>? = null,
     val errorMessage: String? = null,
     val isLoading: Boolean = false
 )

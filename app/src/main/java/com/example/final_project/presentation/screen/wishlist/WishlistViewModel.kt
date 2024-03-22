@@ -60,14 +60,10 @@ class WishlistViewModel @Inject constructor(
     private fun fetchAllProducts() {
         viewModelScope.launch {
             getAllLocalProductsUseCase().collect { list ->
-                if (list.isEmpty()) {
-                    errorMessage(message = "The Wishlist Is Empty")
-                } else {
-                    _wishlistState.update { currentState ->
-                        currentState.copy(productsList = list.map {
-                            it.toPresenter()
-                        })
-                    }
+                _wishlistState.update { currentState ->
+                    currentState.copy(productsList = list.map {
+                        it.toPresenter()
+                    })
                 }
             }
         }

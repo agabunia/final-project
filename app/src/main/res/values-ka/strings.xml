@@ -48,4 +48,5 @@
     <string name="payment_failed">შეკვეთა წარუმატებელია</string>
     <string name="orders_will_be_delivered_in_3_days">შეკვეთა მოგეწოდებათ 3 დღეში!</string>
     <string name="your_payment_occurred_an_error">ტრანზაქციაში დაფიქსირდა შეცდომა.</string>
+    <string name="the_wishlist_is_currently_empty">კალათა ცარიელია</string>
 </resources>

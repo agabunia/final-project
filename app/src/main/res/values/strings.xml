@@ -47,4 +47,5 @@
     <string name="payment_failed">Payment Failed</string>
     <string name="orders_will_be_delivered_in_3_days">Orders will be delivered in 3 days!</string>
     <string name="your_payment_occurred_an_error">Your payment occurred an error.</string>
+    <string name="the_wishlist_is_currently_empty">The Wishlist is currently empty</string>
 </resources>

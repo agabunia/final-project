@@ -36,7 +36,7 @@ object AppModule {
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
-    private const val BASE_URL = "https://run.mocky.io/v3/"
+    private const val BASE_URL = "https://dummyjson.com/"
 
     @Provides
     @Singleton

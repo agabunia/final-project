@@ -51,7 +51,6 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(event: HomeEvent) {
         when (event) {
-            is HomeEvent.FetchProducts -> fetchProducts(categories = event.category)
             is HomeEvent.FetchCategoryList -> fetchCategoryList()
             is HomeEvent.ResetErrorMessage -> errorMessage(message = null)
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
@@ -64,6 +63,26 @@ class HomeViewModel @Inject constructor(
     init {
         getTheme()
         getLanguage()
+    }
+
+    private fun fetchCategoryList() {
+        viewModelScope.launch {
+            getCategoryListUseCase().collect {
+                when (it) {
+                    is Resource.Success -> {
+                        fetchProducts(it.data)
+                    }
+
+                    is Resource.Error -> {
+                        errorMessage(message = it.errorMessage)
+                    }
+
+                    is Resource.Loading -> {
+                        _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchProducts(categories: List<String>) {
@@ -93,29 +112,6 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun fetchCategoryList() {
-        viewModelScope.launch {
-            getCategoryListUseCase().collect {
-                when (it) {
-                    is Resource.Success -> {
-                        d("fetched", "category: ${it.data}")
-                        _homeState.update { currentState ->
-                            currentState.copy(categoryList = it.data)
-                        }
-                    }
-
-                    is Resource.Error -> {
-                        errorMessage(message = it.errorMessage)
-                    }
-
-                    is Resource.Loading -> {
-                        _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
-                    }
-                }
-            }
-        }
-    }
-
     private fun errorMessage(message: String?) {
         _homeState.update { currentState -> currentState.copy(errorMessage = message) }
     }
@@ -130,7 +126,6 @@ class HomeViewModel @Inject constructor(
     private fun getTheme() {
         viewModelScope.launch {
             getThemeDataStoreUseCase().collect {
-                d("homeTest", "fragment viewmodel: $it")
                 if (it == "dark") {
                     _appState.update { themeState ->
                         themeState.copy(isLight = false)

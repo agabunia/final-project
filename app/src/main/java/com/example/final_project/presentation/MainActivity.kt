@@ -9,6 +9,8 @@ import android.util.Log
 import android.util.Log.d
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setNavigation()
         readPushToken()
-        navigateFromPushNotification()
     }
 
     fun hideBottomNavigationBar() {
@@ -75,17 +76,6 @@ class MainActivity : AppCompatActivity() {
             // Log and toast
             d("firebaseToken", token)
         })
-    }
-
-    private fun navigateFromPushNotification() {
-//        val redirect = intent.getStringExtra("product_id")
-//        if (redirect != null) {
-//            d("receivedProductId", redirect)
-//        }
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.fragmentContainerView, ProductDetailedFragment())
-//            commit()
-//        }
     }
 
 

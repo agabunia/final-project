@@ -1,5 +1,6 @@
 package com.example.final_project.presentation.screen.wishlist
 
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -73,7 +74,21 @@ class WishlistFragment : BaseFragment<FragmentWishlistBinding>(FragmentWishlistB
 
     private fun handleState(state: WishlistState) {
         state.productsList?.let {
-            wishlistProductRecyclerAdapter.submitList(it)
+            if (it.isEmpty()) {
+                binding.apply {
+                    rvWishlistProducts.visibility = View.GONE
+                    layoutEmptyWishlist.visibility = View.VISIBLE
+                    btnBuyNow.isClickable = false
+                    btnBuyNow.setBackgroundResource(R.drawable.delete_all_button_shape)
+                }
+
+            } else {
+                binding.apply {
+                    rvWishlistProducts.visibility = View.VISIBLE
+                    layoutEmptyWishlist.visibility = View.GONE
+                }
+                wishlistProductRecyclerAdapter.submitList(it)
+            }
         }
 
         state.errorMessage?.let {
