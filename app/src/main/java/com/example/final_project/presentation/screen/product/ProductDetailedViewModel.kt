@@ -44,6 +44,12 @@ class ProductDetailedViewModel @Inject constructor(
             is ProductEvent.SaveProduct -> saveProductInDatabase(product = event.product)
             is ProductEvent.BuyProduct -> buyProduct(amount = event.amount)
             is ProductEvent.NavigateBack -> navigateBack()
+            is ProductEvent.IncreaseQuantity -> increaseQuantity(
+                quantity = event.quantity,
+                stock = event.stock
+            )
+
+            is ProductEvent.DecreaseQuantity -> decreaseQuantity(quantity = event.quantity)
         }
     }
 
@@ -102,9 +108,29 @@ class ProductDetailedViewModel @Inject constructor(
         _productState.update { currentState -> currentState.copy(errorMessage = message) }
     }
 
+    private fun increaseQuantity(quantity: Int, stock: Int) {
+        var newQuantity = quantity
+        if (quantity < stock) {
+            newQuantity += 1
+        }
+        _productState.update { currentState ->
+            currentState.copy(quantity = newQuantity)
+        }
+    }
+
+    private fun decreaseQuantity(quantity: Int) {
+        var newQuantity = quantity
+        if (quantity > 0) {
+            newQuantity -= 1
+        }
+        _productState.update { currentState ->
+            currentState.copy(quantity = newQuantity)
+        }
+    }
+
     sealed interface UIEvent {
         data class navigateToPayment(val isSuccessful: Boolean) : UIEvent
-        object NavigateBack: UIEvent
+        object NavigateBack : UIEvent
     }
 
 }

@@ -8,4 +8,6 @@ sealed class ProductEvent {
     data class SaveProduct(var product: ProductDetailed): ProductEvent()
     data class BuyProduct(var amount: Int): ProductEvent()
     object NavigateBack: ProductEvent()
+    data class IncreaseQuantity(val quantity: Int, val stock: Int): ProductEvent()
+    data class DecreaseQuantity(val quantity: Int): ProductEvent()
 }

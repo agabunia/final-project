@@ -38,9 +38,6 @@ class ProductDetailedFragment :
     private lateinit var starRecyclerAdapter: StarRecyclerAdapter
     private val productArgs: ProductDetailedFragmentArgs by navArgs()
 
-    private var amount: Int = 0
-    private var stockAmount: Int = 0
-
     override fun bind() {
         (activity as? MainActivity)?.hideBottomNavigationBar()
         viewModel.onEvent(ProductEvent.FetchProductDetailed(productArgs.id))
@@ -52,15 +49,19 @@ class ProductDetailedFragment :
         }
 
         binding.btnMinus.setOnClickListener {
-            decreaseQuantity()
+            val quantity = binding.tvQuantity.text.toString().toInt()
+            viewModel.onEvent(ProductEvent.DecreaseQuantity(quantity = quantity))
         }
 
         binding.btnPlus.setOnClickListener {
-            increaseQuantity()
+            val quantity = binding.tvQuantity.text.toString().toInt()
+            val stock = binding.tvProductStock.text.toString().toInt()
+            viewModel.onEvent(ProductEvent.IncreaseQuantity(quantity = quantity, stock = stock))
         }
 
         binding.btnBuyNow.setOnClickListener {
             val quantity = binding.tvQuantity.text.toString().toInt()
+            val amount = binding.tvProductPrice.text.toString().toInt()
             viewModel.onEvent(ProductEvent.BuyProduct(quantity * amount))
         }
     }
@@ -88,6 +89,10 @@ class ProductDetailedFragment :
             bindProductItems(it)
         }
 
+        state.quantity?.let {
+            binding.tvQuantity.text = it.toString()
+        }
+
         state.errorMessage?.let {
             toastMessage(it)
             viewModel.onEvent(ProductEvent.ResetErrorMessage)
@@ -95,17 +100,6 @@ class ProductDetailedFragment :
 
         binding.progressBar.visibility =
             if (state.isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun handleUiEvent(event: ProductDetailedViewModel.UIEvent) {
-        when (event) {
-            is ProductDetailedViewModel.UIEvent.navigateToPayment -> navigateToPayment(event.isSuccessful)
-            is ProductDetailedViewModel.UIEvent.NavigateBack -> goBack()
-        }
-    }
-
-    private fun toastMessage(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun bindProductItems(product: ProductDetailed) {
@@ -117,9 +111,6 @@ class ProductDetailedFragment :
             tvProductDescription.text = product.description
             tvProductDiscountRate.text = product.discountPercentage.toString()
             tvProductStock.text = product.stock.toString()
-
-            amount = product.price
-            stockAmount = product.stock
 
             setViewPagerAdapter(product.images)
             setStarRecyclerAdapter(product.rating)
@@ -148,20 +139,12 @@ class ProductDetailedFragment :
         }
     }
 
-    private fun increaseQuantity() {
-        var quantity = binding.tvQuantity.text.toString().toInt()
-        if (quantity < stockAmount) {
-            quantity += 1
-        }
-        binding.tvQuantity.text = quantity.toString()
-    }
 
-    private fun decreaseQuantity() {
-        var quantity = binding.tvQuantity.text.toString().toInt()
-        if (quantity > 1) {
-            quantity -= 1
+    private fun handleUiEvent(event: ProductDetailedViewModel.UIEvent) {
+        when (event) {
+            is ProductDetailedViewModel.UIEvent.navigateToPayment -> navigateToPayment(event.isSuccessful)
+            is ProductDetailedViewModel.UIEvent.NavigateBack -> goBack()
         }
-        binding.tvQuantity.text = quantity.toString()
     }
 
     private fun goBack() {
@@ -174,6 +157,10 @@ class ProductDetailedFragment :
                 isSuccessful
             )
         findNavController().navigate(action)
+    }
+
+    private fun toastMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
 }
