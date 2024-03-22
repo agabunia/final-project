@@ -6,4 +6,5 @@ sealed class ProductEvent {
     data class FetchProductDetailed(val id: Int): ProductEvent()
     object ResetErrorMessage: ProductEvent()
     data class SaveProduct(var product: ProductDetailed): ProductEvent()
+    data class BuyProduct(var amount: Int): ProductEvent()
 }

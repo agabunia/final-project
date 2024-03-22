@@ -1,6 +1,7 @@
 package com.example.final_project.presentation.screen.product
 
 import android.os.Bundle
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,9 @@ class ProductDetailedFragment :
     private lateinit var starRecyclerAdapter: StarRecyclerAdapter
     private val productArgs: ProductDetailedFragmentArgs by navArgs()
 
+    private var amount: Int = 0
+    private var stockAmount: Int = 0
+
     override fun bind() {
         (activity as? MainActivity)?.hideBottomNavigationBar()
         viewModel.onEvent(ProductEvent.FetchProductDetailed(productArgs.id))
@@ -46,6 +50,19 @@ class ProductDetailedFragment :
         binding.btnBack.setOnClickListener {
             goBack()
         }
+
+        binding.btnMinus.setOnClickListener {
+            decreaseQuantity()
+        }
+
+        binding.btnPlus.setOnClickListener {
+            increaseQuantity()
+        }
+
+        binding.btnBuyNow.setOnClickListener {
+            val quantity = binding.tvQuantity.text.toString().toInt()
+            viewModel.onEvent(ProductEvent.BuyProduct(quantity * amount))
+        }
     }
 
     override fun bindObserves() {
@@ -53,6 +70,14 @@ class ProductDetailedFragment :
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.productState.collect {
                     handleState(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiEvent.collect {
+                    handleUiState(it)
                 }
             }
         }
@@ -72,6 +97,12 @@ class ProductDetailedFragment :
             if (state.isLoading) View.VISIBLE else View.GONE
     }
 
+    private fun handleUiState(event: ProductDetailedViewModel.UIEvent) {
+        when (event) {
+            is ProductDetailedViewModel.UIEvent.navigateToPayment -> navigateToPayment(event.isSuccessful)
+        }
+    }
+
     private fun toastMessage(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
@@ -85,6 +116,9 @@ class ProductDetailedFragment :
             tvProductDescription.text = product.description
             tvProductDiscountRate.text = product.discountPercentage.toString()
             tvProductStock.text = product.stock.toString()
+
+            amount = product.price
+            stockAmount = product.stock
 
             setViewPagerAdapter(product.images)
             setStarRecyclerAdapter(product.rating)
@@ -113,8 +147,32 @@ class ProductDetailedFragment :
         }
     }
 
+    private fun increaseQuantity() {
+        var quantity = binding.tvQuantity.text.toString().toInt()
+        if (quantity < stockAmount) {
+            quantity += 1
+        }
+        binding.tvQuantity.text = quantity.toString()
+    }
+
+    private fun decreaseQuantity() {
+        var quantity = binding.tvQuantity.text.toString().toInt()
+        if (quantity > 1) {
+            quantity -= 1
+        }
+        binding.tvQuantity.text = quantity.toString()
+    }
+
     private fun goBack() {
         findNavController().popBackStack()
+    }
+
+    private fun navigateToPayment(isSuccessful: Boolean) {
+        val action =
+            ProductDetailedFragmentDirections.actionProductDetailedFragmentToPaymentFragment(
+                isSuccessful
+            )
+        findNavController().navigate(action)
     }
 
 }

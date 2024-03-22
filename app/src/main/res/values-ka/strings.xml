@@ -42,4 +42,10 @@
     <string name="_1">1</string>
     <string name="minus_sign">-</string>
     <string name="delete_all">ყველას წაშლა</string>
+    <string name="_1x">-1X</string>
+    <string name="payment_is_successful">შეკვეთა წარმატებულია!</string>
+    <string name="back_to_home_page">მთავარ გვერდზე დაბრუნება</string>
+    <string name="payment_failed">შეკვეთა წარუმატებელია</string>
+    <string name="orders_will_be_delivered_in_3_days">შეკვეთა მოგეწოდებათ 3 დღეში!</string>
+    <string name="your_payment_occurred_an_error">ტრანზაქციაში დაფიქსირდა შეცდომა.</string>
 </resources>

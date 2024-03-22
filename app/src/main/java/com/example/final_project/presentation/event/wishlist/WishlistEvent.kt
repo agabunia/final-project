@@ -10,4 +10,5 @@ sealed class WishlistEvent {
     data class IncreaseItemQuantity(val id: Int) : WishlistEvent()
     data class DecreaseItemQuantity(val id: Int) : WishlistEvent()
     object DeleteAllItem : WishlistEvent()
+    data class BuyProduct(var amount: Int): WishlistEvent()
 }

@@ -42,4 +42,9 @@
     <string name="minus_sign">-</string>
     <string name="delete_all">Delete All</string>
     <string name="_1x">-1X</string>
+    <string name="payment_is_successful">Payment is successful!</string>
+    <string name="back_to_home_page">Back to Home page</string>
+    <string name="payment_failed">Payment Failed</string>
+    <string name="orders_will_be_delivered_in_3_days">Orders will be delivered in 3 days!</string>
+    <string name="your_payment_occurred_an_error">Your payment occurred an error.</string>
 </resources>
