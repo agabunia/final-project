@@ -76,15 +76,4 @@ class WrapperRecyclerAdapter :
         }
 
     }
-
-//    inner class MarketingImageViewHolder(private val binding: MarketingImageLayoutBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
-//        private lateinit var image: ImageModel
-//
-//        fun bindImage() {
-//            image = currentList[adapterPosition].image
-//
-//            binding.sivProductMarketing.loadImage(image.images)
-//        }
-//    }
 }

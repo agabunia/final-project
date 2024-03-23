@@ -3,7 +3,6 @@ package com.example.final_project.presentation.screen.home
 import android.app.LocaleManager
 import android.os.Build
 import android.os.LocaleList
-import android.util.Log.d
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
@@ -21,9 +20,6 @@ import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.home.WrapperRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.home.HomeEvent
-import com.example.final_project.presentation.extention.loadImage
-import com.example.final_project.presentation.screen.search.SearchFragmentDirections
-import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import com.google.android.material.navigation.NavigationView
@@ -94,7 +90,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             rvWrapper.adapter = wrapperRecyclerAdapter
         }
         viewModel.onEvent(HomeEvent.FetchProducts)
-        viewModel.onEvent(HomeEvent.FetchImage)
+//        viewModel.onEvent(HomeEvent.FetchImage)
     }
 
     private fun handleState(state: HomeState) {

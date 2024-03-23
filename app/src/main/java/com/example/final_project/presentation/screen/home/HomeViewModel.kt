@@ -21,6 +21,7 @@ import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.app_state.AppState
 import com.example.final_project.presentation.state.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,8 +39,7 @@ class HomeViewModel @Inject constructor(
     private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase,
     private val changeLanguageDataStoreUseCase: ChangeLanguageDataStoreUseCase,
     private val getLanguageDataStoreUseCase: GetLanguageDataStoreUseCase,
-    private val insertProductInLocalUseCase: InsertProductInLocalUseCase,
-    private val getImageUseCase: GetImageUseCase
+    private val insertProductInLocalUseCase: InsertProductInLocalUseCase
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeState())
@@ -54,7 +54,6 @@ class HomeViewModel @Inject constructor(
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.FetchProducts -> fetchCategoryList()
-            is HomeEvent.FetchImage -> fetchImage()
             is HomeEvent.ResetErrorMessage -> errorMessage(message = null)
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
             is HomeEvent.ChangeLanguage -> changeLanguage(isGeorgian = event.isGeorgian)
@@ -89,7 +88,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun fetchProducts(categories: List<String>) {
-        viewModelScope.launch {
+        viewModelScope.launch {// ეს დისპაჩერი დავგუგლო !!!
             for (category in categories) {
                 getProductsByCategoryUseCase(category = category).collect {
                     when (it) {
@@ -109,28 +108,6 @@ class HomeViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                         }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun fetchImage() {
-        viewModelScope.launch {
-            getImageUseCase().collect {
-                when (it) {
-                    is Resource.Success -> {
-                        _homeState.update { currentState ->
-                            currentState.copy(image = it.data.images)
-                        }
-                    }
-
-                    is Resource.Error -> {
-                        errorMessage(message = it.errorMessage)
-                    }
-
-                    is Resource.Loading -> {
-                        _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                     }
                 }
             }
