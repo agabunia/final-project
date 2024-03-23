@@ -10,6 +10,7 @@ import com.example.final_project.domain.local.usecase.datastore.theme.ChangeThem
 import com.example.final_project.domain.local.usecase.datastore.theme.GetThemeDataStoreUseCase
 import com.example.final_project.domain.local.usecase.db_manipulators.InsertProductInLocalUseCase
 import com.example.final_project.domain.remote.usecase.home.GetCategoryListUseCase
+import com.example.final_project.domain.remote.usecase.home.GetImageUseCase
 import com.example.final_project.domain.remote.usecase.home.GetProductsByCategoryUseCase
 import com.example.final_project.presentation.event.home.HomeEvent
 import com.example.final_project.presentation.mapper.common_product_list.toDomain
@@ -37,7 +38,8 @@ class HomeViewModel @Inject constructor(
     private val getThemeDataStoreUseCase: GetThemeDataStoreUseCase,
     private val changeLanguageDataStoreUseCase: ChangeLanguageDataStoreUseCase,
     private val getLanguageDataStoreUseCase: GetLanguageDataStoreUseCase,
-    private val insertProductInLocalUseCase: InsertProductInLocalUseCase
+    private val insertProductInLocalUseCase: InsertProductInLocalUseCase,
+    private val getImageUseCase: GetImageUseCase
 ) : ViewModel() {
 
     private val _homeState = MutableStateFlow(HomeState())
@@ -51,7 +53,8 @@ class HomeViewModel @Inject constructor(
 
     fun onEvent(event: HomeEvent) {
         when (event) {
-            is HomeEvent.FetchCategoryList -> fetchCategoryList()
+            is HomeEvent.FetchProducts -> fetchCategoryList()
+            is HomeEvent.FetchImage -> fetchImage()
             is HomeEvent.ResetErrorMessage -> errorMessage(message = null)
             is HomeEvent.ChangeTheme -> setLightTheme(isLight = event.isLight)
             is HomeEvent.ChangeLanguage -> changeLanguage(isGeorgian = event.isGeorgian)
@@ -106,6 +109,28 @@ class HomeViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun fetchImage() {
+        viewModelScope.launch {
+            getImageUseCase().collect {
+                when (it) {
+                    is Resource.Success -> {
+                        _homeState.update { currentState ->
+                            currentState.copy(image = it.data.images)
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        errorMessage(message = it.errorMessage)
+                    }
+
+                    is Resource.Loading -> {
+                        _homeState.update { currentState -> currentState.copy(isLoading = it.loading) }
                     }
                 }
             }

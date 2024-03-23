@@ -21,6 +21,7 @@ import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.home.WrapperRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.home.HomeEvent
+import com.example.final_project.presentation.extention.loadImage
 import com.example.final_project.presentation.screen.search.SearchFragmentDirections
 import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.app_state.AppState
@@ -92,7 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             rvWrapper.setHasFixedSize(true)
             rvWrapper.adapter = wrapperRecyclerAdapter
         }
-        viewModel.onEvent(HomeEvent.FetchCategoryList) // saxeli shevucvalo
+        viewModel.onEvent(HomeEvent.FetchProducts)
+        viewModel.onEvent(HomeEvent.FetchImage)
     }
 
     private fun handleState(state: HomeState) {
@@ -106,6 +108,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         state.errorMessage?.let {
             toastMessage(it)
         }
+
+//        state.image?.let {
+//            binding.sivProductMarketing.loadImage(it)
+//        }
     }
 
     private fun toastMessage(message: String) {

@@ -15,11 +15,17 @@ class WrapperRecyclerAdapter :
     ListAdapter<CategoryWrapperList, WrapperRecyclerAdapter.WrapperViewHolder>(CategoryDiffUtil()) {
 
     class CategoryDiffUtil : DiffUtil.ItemCallback<CategoryWrapperList>() {
-        override fun areItemsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {
+        override fun areItemsTheSame(
+            oldItem: CategoryWrapperList,
+            newItem: CategoryWrapperList
+        ): Boolean {
             return oldItem.categoryName == newItem.categoryName
         }
 
-        override fun areContentsTheSame(oldItem: CategoryWrapperList, newItem: CategoryWrapperList): Boolean {
+        override fun areContentsTheSame(
+            oldItem: CategoryWrapperList,
+            newItem: CategoryWrapperList
+        ): Boolean {
             return oldItem == newItem
         }
     }
@@ -70,4 +76,15 @@ class WrapperRecyclerAdapter :
         }
 
     }
+
+//    inner class MarketingImageViewHolder(private val binding: MarketingImageLayoutBinding) :
+//        RecyclerView.ViewHolder(binding.root) {
+//        private lateinit var image: ImageModel
+//
+//        fun bindImage() {
+//            image = currentList[adapterPosition].image
+//
+//            binding.sivProductMarketing.loadImage(image.images)
+//        }
+//    }
 }

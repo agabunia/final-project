@@ -3,7 +3,8 @@ package com.example.final_project.presentation.event.home
 import com.example.final_project.presentation.model.common_product_list.Products
 
 sealed class HomeEvent {
-    object FetchCategoryList : HomeEvent()
+    object FetchImage: HomeEvent()
+    object FetchProducts : HomeEvent()
     object ResetErrorMessage : HomeEvent()
     data class ChangeTheme(val isLight: Boolean) : HomeEvent()
     data class ChangeLanguage(val isGeorgian: Boolean) : HomeEvent()
