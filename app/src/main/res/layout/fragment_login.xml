@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     tools:context=".presentation.screen.login.LoginFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -15,8 +14,7 @@
         android:layout_marginTop="100dp"
         android:text="@string/welcome_eng"
         android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/white"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailLayout"
@@ -82,7 +80,6 @@
         android:background="@drawable/btn_background"
         android:text="@string/login_eng"
         android:textAllCaps="false"
-        android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +92,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/do_not_have_account"
-        android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@id/passwordLayout"
         app:layout_constraintTop_toBottomOf="@id/btnLogin" />
@@ -109,7 +105,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/register_now_eng"
-        android:textColor="@color/start_blue"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@id/tvAccount"
         app:layout_constraintTop_toBottomOf="@id/btnLogin" />

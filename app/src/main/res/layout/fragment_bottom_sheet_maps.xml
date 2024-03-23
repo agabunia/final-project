@@ -9,16 +9,17 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etSearch"
-        android:hint="@string/search_your_location"
+        android:hint="@string/fill_in_location_eng"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSearchBottomSheet"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
+        android:text="@string/save_info_eng"
+        android:textAllCaps="false"
         android:background="@drawable/btn_background"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

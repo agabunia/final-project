@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
     tools:context=".presentation.screen.address.AddressFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -42,17 +41,35 @@
         android:id="@+id/rvAllAddresses"
         />
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="center">
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_background"
-        android:text="@string/add_new_address"
+        android:text="@string/show_map"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAllCaps="false"
         android:layout_marginTop="15dp"
-        android:id="@+id/addNewAddress"
+        android:id="@+id/showMap"
         android:layout_gravity="center_horizontal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_address"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:textAllCaps="false"
+            android:layout_marginTop="15dp"
+            android:id="@+id/addNewAddress"
+            android:layout_gravity="center_horizontal"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -62,7 +79,6 @@
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:textAllCaps="false"
-        android:layout_marginTop="15dp"
         android:id="@+id/SaveChanges"
         android:layout_gravity="center_horizontal"/>
 

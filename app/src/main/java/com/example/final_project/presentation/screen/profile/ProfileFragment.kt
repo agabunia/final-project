@@ -5,14 +5,19 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.final_project.databinding.FragmentProfileBinding
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.extensions.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
+
+    private val profileViewModel: ProfileViewModel by viewModels()
     override fun bind() {
     }
 
@@ -53,7 +58,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     override fun bindObserves() {
+        lifecycleScope.launch {
+            profileViewModel.name.collect { name ->
+                binding.tvUsername.text = name
+            }
+        }
 
+        lifecycleScope.launch {
+            profileViewModel.phone.collect { phone ->
+                binding.phone.text = phone
+            }
+        }
     }
 
     private fun navigateToEditProfileFragment(){

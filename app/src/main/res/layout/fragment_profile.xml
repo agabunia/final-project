@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray_for_background"
     tools:context=".presentation.screen.profile.ProfileFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -58,7 +57,6 @@
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:text="Nintsa Kemularia"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +68,6 @@
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:text="+995 589 78 54 25"
-        android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,10 +80,13 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:background="@color/dart_gray_for_bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/phone" />
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"></ScrollView>-->
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icProfile"
@@ -106,7 +106,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/edit_profile"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icProfile"
         app:layout_constraintTop_toTopOf="@id/icProfile" />
@@ -143,7 +142,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/address"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icAddress"
         app:layout_constraintTop_toTopOf="@id/icAddress" />
@@ -179,7 +177,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/payment"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icWallet"
         app:layout_constraintTop_toTopOf="@id/icWallet" />
@@ -215,8 +212,7 @@
         android:layout_marginStart="13dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/security"
-        android:textColor="@color/white"
+        android:text="@string/terms_and_conditions"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icSecurity"
         app:layout_constraintTop_toTopOf="@id/icSecurity" />
@@ -252,7 +248,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/privacy_policy"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icPrivacy"
         app:layout_constraintTop_toTopOf="@id/icPrivacy" />
@@ -289,7 +284,6 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/log_out"
-        android:textColor="@color/red"
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/icLogout"
         app:layout_constraintTop_toTopOf="@id/icLogout" />

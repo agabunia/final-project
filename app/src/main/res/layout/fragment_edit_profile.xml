@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     tools:context=".presentation.screen.editprofile.EditProfileFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -57,7 +56,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/name"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backEditProfilePicture" />
@@ -68,34 +66,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="Nintsa"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/tvName"
         app:layout_constraintStart_toEndOf="@id/tvName"
         app:layout_constraintTop_toTopOf="@id/tvName" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/last_name"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/tvName"
-        app:layout_constraintTop_toBottomOf="@id/tvName" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="Kemularia"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvLastName"
-        app:layout_constraintStart_toEndOf="@id/tvLastName"
-        app:layout_constraintTop_toTopOf="@id/tvLastName" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvEmail"
@@ -103,10 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/email_address"
-        android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@id/tvLastName"
-        app:layout_constraintTop_toBottomOf="@id/tvLastName" />
+        app:layout_constraintStart_toStartOf="@id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/tvName" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etEmail"
@@ -114,7 +87,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="Kninca@gmail.com"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/tvEmail"
         app:layout_constraintStart_toEndOf="@id/tvEmail"
@@ -126,7 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/phone_number"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/tvEmail"
         app:layout_constraintTop_toBottomOf="@id/tvEmail" />
@@ -137,7 +108,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:text="+995 575 87 44 58"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/tvPhoneNumber"
         app:layout_constraintStart_toEndOf="@id/tvPhoneNumber"
@@ -151,13 +121,12 @@
         android:clickable="true"
         android:focusable="true"
         android:text="@string/change_password"
-        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/tvPhoneNumber"
         app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/SaveChanges"
+        android:id="@+id/btnSaveChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
