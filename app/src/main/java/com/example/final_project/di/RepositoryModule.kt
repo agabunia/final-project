@@ -7,15 +7,15 @@ import com.example.final_project.data.local.dao.ProductDao
 import com.example.final_project.data.local.repository.datastore.DataStoreRepositoryImpl
 import com.example.final_project.data.local.repository.room.LocalProductRepositoryImpl
 import com.example.final_project.data.remote.repository.home.CategoryListRepositoryImpl
-import com.example.final_project.data.remote.repository.home.ImageRepositoryImpl
 import com.example.final_project.data.remote.repository.home.ProductByCategoryRepositoryImpl
 import com.example.final_project.data.remote.repository.login.LoginRepositoryImpl
 import com.example.final_project.data.remote.repository.product.ProductDetailedRepositoryImpl
+import com.example.final_project.data.remote.repository.profile.GetProfileImageRepositoryImpl
+import com.example.final_project.data.remote.repository.profile.ProfileChangeImageRepositoryImpl
 import com.example.final_project.data.remote.repository.registration.RegistrationRepositoryImpl
 import com.example.final_project.data.remote.repository.search.ProductRepositoryImpl
 import com.example.final_project.data.remote.repository.search.ProductSearchRepositoryImpl
 import com.example.final_project.data.remote.service.home.CategoryListService
-import com.example.final_project.data.remote.service.home.ImageService
 import com.example.final_project.data.remote.service.home.ProductByCategoryService
 import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
@@ -23,10 +23,11 @@ import com.example.final_project.data.remote.service.search.ProductService
 import com.example.final_project.domain.local.repository.wishlist.LocalProductRepository
 import com.example.final_project.domain.local.repository.datastore.DataStoreRepository
 import com.example.final_project.domain.remote.repository.home.CategoryListRepository
-import com.example.final_project.domain.remote.repository.home.ImageRepository
 import com.example.final_project.domain.remote.repository.home.ProductByCategoryRepository
 import com.example.final_project.domain.remote.repository.login.LoginRepository
 import com.example.final_project.domain.remote.repository.product.ProductDetailedRepository
+import com.example.final_project.domain.remote.repository.profile.GetProfileImageRepository
+import com.example.final_project.domain.remote.repository.profile.ProfileRepository
 import com.example.final_project.domain.remote.repository.registration.RegistrationRepository
 import com.example.final_project.domain.remote.repository.search.ProductRepository
 import com.example.final_project.domain.remote.repository.search.ProductSearchRepository
@@ -47,6 +48,16 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideRegistrationRepository(impl: RegistrationRepositoryImpl): RegistrationRepository =
+        impl
+
+    @Provides
+    @Singleton
+    fun provideProfileRepository(impl: ProfileChangeImageRepositoryImpl): ProfileRepository =
+        impl
+
+    @Provides
+    @Singleton
+    fun provideGetProfileImageRepository(impl: GetProfileImageRepositoryImpl): GetProfileImageRepository =
         impl
 
     @Provides
@@ -112,18 +123,6 @@ object RepositoryModule {
         return CategoryListRepositoryImpl(
             handleResponse = handleResponse,
             categoryListService = categoryListService
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideImageRepository(
-        handleResponse: HandleResponse,
-        imageService: ImageService
-    ): ImageRepository {
-        return ImageRepositoryImpl(
-            handleResponse = handleResponse,
-            imageService = imageService
         )
     }
 

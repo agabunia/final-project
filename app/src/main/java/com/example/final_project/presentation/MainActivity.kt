@@ -78,23 +78,4 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
-    // ეს გასასწორებელია რომ სპლეშში, რეგისტრაციაში და ლოგინში არ გამოჩნდეს. რატომღაც მგონია რომ
-    // ინდივიდუალურად უნდა გავუწეროთ ფრაგმენტებს
-//    private fun setDrawerNavigationListener() {
-//        binding.drawerMenu.setNavigationItemSelectedListener {
-//            true
-//        }
-//    }
-
-
-    //  შემდეგი სქრიუნიდან გადავცემ წინა სქრინს არგუმენტს
-//    fun <T> Fragment.navigationResult(key: String) =
-//        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
-//
-//    fun <T> Fragment.setNavigationResult(key: String, result: T) {
-//        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
-//    }
-
-
 }

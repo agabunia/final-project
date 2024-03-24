@@ -7,5 +7,6 @@ import javax.inject.Inject
 class GetLanguageDataStoreUseCase @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
 ) {
-    suspend operator fun invoke() = dataStoreRepository.getLanguageString(key = PreferenceKeys.LANGUAGE)
+    suspend operator fun invoke() =
+        dataStoreRepository.getLanguageString(key = PreferenceKeys.LANGUAGE)
 }

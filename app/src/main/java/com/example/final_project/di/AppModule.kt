@@ -6,7 +6,6 @@ import com.example.final_project.data.common.HandleResponse
 import com.example.final_project.data.local.dao.ProductDao
 import com.example.final_project.data.local.database.AppDatabase
 import com.example.final_project.data.remote.service.home.CategoryListService
-import com.example.final_project.data.remote.service.home.ImageService
 import com.example.final_project.data.remote.service.home.ProductByCategoryService
 import com.example.final_project.data.remote.service.product.ProductDetailedService
 import com.example.final_project.data.remote.service.search.ProductSearchService
@@ -26,7 +25,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -119,12 +117,6 @@ object AppModule {
     @Provides
     fun provideCategoryListService(retrofit: Retrofit): CategoryListService {
         return retrofit.create(CategoryListService::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideImageService(retrofit: Retrofit): ImageService {
-        return retrofit.create(ImageService::class.java)
     }
 
     @Singleton

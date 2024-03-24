@@ -24,8 +24,6 @@
         android:layout_height="65dp"
         android:theme="@style/BottomNavigationTheme"
         android:visibility="gone"
-        app:itemIconTint="@drawable/bottom_navigation_item_selector"
-        app:itemTextColor="@drawable/bottom_navigation_item_selector"
         app:menu="@menu/bottom_nav" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

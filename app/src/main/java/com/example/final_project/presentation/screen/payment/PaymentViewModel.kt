@@ -2,6 +2,7 @@ package com.example.final_project.presentation.screen.payment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.final_project.domain.local.usecase.db_manipulators.DeleteAllLocalProductsUseCase
 import com.example.final_project.presentation.event.payment.PaymentEvent
 import com.example.final_project.presentation.state.payment.PaymentState
 import com.example.final_project.presentation.state.product.ProductState
@@ -15,7 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentViewModel @Inject constructor() : ViewModel() {
+class PaymentViewModel @Inject constructor(
+    private val deleteAllLocalProductsUseCase: DeleteAllLocalProductsUseCase,
+) : ViewModel() {
 
     private val _paymentState = MutableStateFlow(PaymentState())
     val paymentState: SharedFlow<PaymentState> = _paymentState.asStateFlow()
@@ -32,9 +35,12 @@ class PaymentViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun processPayment(isSuccessful: Boolean) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             _paymentState.update { currentState ->
                 currentState.copy(isPaymentSuccessful = isSuccessful)
+            }
+            if (isSuccessful) {
+                deleteAllLocalProductsUseCase()
             }
         }
     }

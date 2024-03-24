@@ -17,6 +17,7 @@
         android:drawablePadding="5dp"
         android:paddingHorizontal="15dp"
         android:text="@string/delete_all"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +65,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="20dp"
-        android:text="Buy Now $154"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:theme="@style/MainImageButtonTheme"
         app:layout_constraintBottom_toBottomOf="parent"

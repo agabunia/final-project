@@ -103,7 +103,7 @@ class RegistrationViewModel @Inject constructor(
 
     sealed interface RegistrationUIEvent {
         object NavigateToLogin : RegistrationUIEvent
-        object NavigateToMain: RegistrationUIEvent
+        object NavigateToMain : RegistrationUIEvent
     }
 
 }

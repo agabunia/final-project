@@ -1,11 +1,8 @@
 package com.example.final_project.presentation.screen.search
 
-import android.util.Log.d
 import android.view.View
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,7 +14,6 @@ import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.common_product_adapter.ProductRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.search.SearchEvent
-import com.example.final_project.presentation.extention.hideKeyboard
 import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -61,7 +57,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun setProductAdapter() {
         productRecyclerAdapter = ProductRecyclerAdapter()
         productRecyclerAdapter.onItemClick = {
-            navigateToProductDetails(it)
+            viewModel.onEvent(SearchEvent.MoveToDetailed(it))
         }
         productRecyclerAdapter.saveProductClick = {
             viewModel.onEvent(SearchEvent.SaveProduct(it))
@@ -82,6 +78,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         state.errorMessage?.let {
             toastMessage(it)
             viewModel.onEvent(SearchEvent.ResetErrorMessage)
+        }
+
+        state.isLoading.let {
+            binding.apply {
+                if (it) {
+                    rvProduct.visibility = View.GONE
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                    rvProduct.visibility = View.VISIBLE
+                }
+            }
         }
 
         binding.progressBar.visibility =

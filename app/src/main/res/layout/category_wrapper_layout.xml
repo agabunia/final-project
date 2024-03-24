@@ -14,14 +14,13 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginStart="25dp"
-        android:background="@color/white" />
+        android:theme="@style/LineBackground" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductList"

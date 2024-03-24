@@ -51,7 +51,7 @@ class FireBasePushNotificationService : FirebaseMessagingService() {
             .setContentText(description)
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setAutoCancel(true) // Automatically dismiss the notification when clicked
+            .setAutoCancel(true)
             .build()
 
         if (ContextCompat.checkSelfPermission(

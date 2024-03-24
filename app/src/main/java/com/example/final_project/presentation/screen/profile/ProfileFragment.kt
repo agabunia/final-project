@@ -4,8 +4,10 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -17,6 +19,8 @@ import com.example.final_project.databinding.FragmentProfileBinding
 import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.profile.ProfileEvent
+import com.example.final_project.presentation.extention.loadImage
+import com.example.final_project.presentation.state.profile.ProfileState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -28,17 +32,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
-    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
-        val galleryUri = it
-        try {
-            binding.ivProfileImage.setImageURI(galleryUri)
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private val galleryLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            uri?.let { viewModel.onEvent(ProfileEvent.ChangeImage(it)) }
         }
-    }
 
     override fun bind() {
         (activity as? MainActivity)?.showBottomNavigationBar()
+//        viewModel.onEvent(ProfileEvent.GetUserProfileImage)
     }
 
     override fun bindListeners() {
@@ -59,11 +60,33 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     override fun bindObserves() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.profileState.collect {
+                    handleState(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiEvent.collect {
                     handleEvent(it)
                 }
             }
         }
+    }
+
+    private fun handleState(state: ProfileState) {
+        state.userImage?.let {
+            binding.ivProfileImage.setImageURI(it)
+        }
+
+        state.errorMessage?.let {
+            toastMessage(it)
+        }
+    }
+
+    private fun toastMessage(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun handleEvent(event: ProfileViewModel.UiEvent) {

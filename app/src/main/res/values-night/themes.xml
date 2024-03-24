@@ -2,7 +2,7 @@
 
     <style name="Theme.Finalproject" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:textColor">@color/white</item>
-        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimary">@color/darkest_blue</item>
     </style>
 
 
@@ -17,21 +17,22 @@
 
     <style name="NavigationBackground">
         <item name="android:background">@drawable/bottom_navigation_shape_dark</item>
+        <item name="itemIconTint">@drawable/bottom_navigation_item_selector_dark</item>
+        <item name="itemTextColor">@drawable/bottom_navigation_item_selector_dark</item>
     </style>
 
 
     <!--    night mode screen background color       -->
     <style name="screenBackground">
-        <item name="android:background">@color/green</item>
+        <item name="android:background">@color/darkest_blue</item>
     </style>
 
     <!--    night mode drawer screen background color       -->
     <style name="drawerScreenBackground">
-        <item name="android:background">@color/greenish</item>
+        <item name="android:background">@color/dark_blue</item>
     </style>
 
     <!--      night mode button color  -->
-    <!--      light mode button color  -->
     <style name="MainImageButtonTheme" parent="Theme.AppCompat">
         <item name="android:background">@android:color/transparent</item>
     </style>
@@ -42,5 +43,16 @@
     <style name="QuantityChangeButtonStyle">
         <item name="android:background">@drawable/button_oval_shape_dark</item>
     </style>
+
+    <!--    night mode product background color       -->
+    <style name="ProductBackground">
+        <item name="android:background">@drawable/item_shape_dark</item>
+    </style>
+
+    <!--    light mode Horizontal line background color       -->
+    <style name="LineBackground">
+        <item name="android:background">@color/white</item>
+    </style>
+
 
 </resources>

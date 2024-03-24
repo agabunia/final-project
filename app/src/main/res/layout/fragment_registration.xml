@@ -53,6 +53,8 @@
             android:hint="@string/enter_email_eng"
             android:inputType="textEmailAddress"
             android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +80,8 @@
             android:hint="@string/enter_password_eng"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -103,6 +107,8 @@
             android:hint="@string/repeat_password_eng"
             android:inputType="textPassword"
             android:maxLines="1"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="20sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -116,6 +122,7 @@
         android:layout_marginBottom="70dp"
         android:background="@drawable/button_shape_light"
         android:text="@string/register_eng"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"

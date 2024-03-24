@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.final_project.databinding.ProductImageLayoutBinding
 import com.example.final_project.presentation.extention.loadImage
 
-class ImageSlideViewPagerAdapter(private val images: List<String>): RecyclerView.Adapter<ImageSlideViewPagerAdapter.ImageViewHolder>() {
+class ImageSlideViewPagerAdapter(private val images: List<String>) :
+    RecyclerView.Adapter<ImageSlideViewPagerAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val inflate = LayoutInflater.from(parent.context)
@@ -22,7 +23,8 @@ class ImageSlideViewPagerAdapter(private val images: List<String>): RecyclerView
         holder.bind(images[position])
     }
 
-    inner class ImageViewHolder(private val binding: ProductImageLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ImageViewHolder(private val binding: ProductImageLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(url: String) {
             binding.ivImages.loadImage(url = url)
         }

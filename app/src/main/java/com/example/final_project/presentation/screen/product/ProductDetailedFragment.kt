@@ -1,11 +1,6 @@
 package com.example.final_project.presentation.screen.product
 
-import android.os.Bundle
-import android.util.Log.d
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,18 +10,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.example.final_project.R
 import com.example.final_project.databinding.FragmentProductDetailedBinding
 import com.example.final_project.presentation.MainActivity
 import com.example.final_project.presentation.adapter.product.ImageSlideViewPagerAdapter
 import com.example.final_project.presentation.adapter.product.StarRecyclerAdapter
 import com.example.final_project.presentation.base.BaseFragment
 import com.example.final_project.presentation.event.product.ProductEvent
-import com.example.final_project.presentation.event.search.SearchEvent
 import com.example.final_project.presentation.model.product.ProductDetailed
-import com.example.final_project.presentation.screen.search.SearchViewModel
 import com.example.final_project.presentation.state.product.ProductState
-import com.example.final_project.presentation.state.search.SearchState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -30,7 +30,6 @@ import kotlinx.coroutines.launch
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var wrapperRecyclerAdapter: WrapperRecyclerAdapter
-
     private lateinit var switchTheme: SwitchCompat
     private lateinit var switchLanguage: SwitchCompat
 
@@ -90,12 +89,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             rvWrapper.adapter = wrapperRecyclerAdapter
         }
         viewModel.onEvent(HomeEvent.FetchProducts)
-//        viewModel.onEvent(HomeEvent.FetchImage)
     }
 
     private fun handleState(state: HomeState) {
-        binding.progressBar.visibility =
-            if (state.isLoading) View.VISIBLE else View.GONE
+        state.isLoading.let {
+            binding.apply {
+                if (it) {
+                    rvWrapper.visibility = View.GONE
+                    progressBar.visibility = View.VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                    rvWrapper.visibility = View.VISIBLE
+                }
+            }
+        }
 
         state.productsList?.let {
             wrapperRecyclerAdapter.submitList(it)
@@ -104,10 +111,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         state.errorMessage?.let {
             toastMessage(it)
         }
-
-//        state.image?.let {
-//            binding.sivProductMarketing.loadImage(it)
-//        }
     }
 
     private fun toastMessage(message: String) {
@@ -148,7 +151,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         changeLanguageConfig(state.isGeorgian)
-
     }
 
     private fun changeLanguageConfig(isGeorgian: Boolean) {
