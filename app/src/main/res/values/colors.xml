@@ -9,7 +9,6 @@
     <color name="genre">#F0EAEA</color>
 
     <color name="yellowish">#DDD9B2</color>
-    <color name="red">#F44336</color>
     <color name="yellow">#FFEB3B</color>
 
     <color name="dark_grey">#5C5B5B</color>
@@ -27,5 +26,7 @@
     <color name="grey">#8F8B8B</color>
     <color name="sky">#E6166BFF</color>
     <color name="greenish">#083721</color>
+    <color name="end_blue">#11A8FD</color>
+    <color name="red">#F44336</color>
 
 </resources>
