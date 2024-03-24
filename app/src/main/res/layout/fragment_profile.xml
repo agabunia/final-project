@@ -6,28 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".presentation.screen.profile.ProfileFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivProfileBackground"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+    <!--    <com.google.android.material.imageview.ShapeableImageView-->
+    <!--        android:id="@+id/ivProfileImage"-->
+    <!--        android:layout_width="120dp"-->
+    <!--        android:layout_height="120dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:src="@drawable/user_picture"-->
+    <!--        android:textSize="45sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:shapeAppearanceOverlay="@style/Circle" />-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:src="@drawable/user_picture"
-        android:textSize="45sp"
+        android:elevation="12dp"
+        app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/Circle" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProfileImage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnEditImage"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="-25dp"
-        android:layout_marginEnd="12dp"
         android:background="@drawable/circle"
+        android:layout_marginEnd="-15dp"
+        android:layout_marginTop="-15dp"
         android:src="@drawable/ic_edit"
-        app:layout_constraintEnd_toEndOf="@id/ivProfileBackground"
-        app:layout_constraintTop_toBottomOf="@id/ivProfileBackground" />
+        app:layout_constraintEnd_toEndOf="@id/cardImage"
+        app:layout_constraintTop_toBottomOf="@id/cardImage" />
 
     <View
         android:id="@+id/line"
@@ -39,7 +59,7 @@
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivProfileBackground" />
+        app:layout_constraintTop_toBottomOf="@id/cardImage" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layoutEditText"
