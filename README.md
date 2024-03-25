@@ -59,7 +59,6 @@ Built With  <br />
 •	Project Architecture: <br />
 o	Clean Architecture <br />
 o	MVI <br />
-o	Repository Pattern <br />
 •	Dependency Injection using Dagger Hilt <br />
 •	Firebase for backend services <br />
 •	Retrofit API integration <br />
